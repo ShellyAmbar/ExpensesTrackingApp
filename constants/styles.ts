@@ -1,5 +1,6 @@
+import {Dimensions} from 'react-native';
 import {GlobalColors} from './colors';
-
+export const {width, height} = Dimensions.get('screen');
 const Styles = {
   H1: {
     fontFamily: 'Segoe UI',

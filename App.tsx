@@ -5,7 +5,7 @@ import {createStyles} from './app.styles';
 import {NavigationContainer} from '@react-navigation/native';
 import MainStack from './navigation/main-stack';
 
-const App = (): JSX.Element => {
+const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
 
   const styles = createStyles(isDarkMode);

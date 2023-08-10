@@ -1,12 +1,12 @@
-import {Animated} from "react-native";
-import React from "react";
-import {Box} from "@traveloffline/components/controllers/box/box";
-import Close from "@mygenes/assets/images/close-small.svg";
-import PopupProps from "./interfaces";
-import Styles from "./popup.styles";
-import usePopup from "./hooks/usePopup";
-import TextFactory from "@traveloffline/components/factories/text-factory";
-import {Modal} from "@ui-kitten/components";
+import {Animated, Modal} from 'react-native';
+import React from 'react';
+
+import Close from '@mygenes/assets/images/close-small.svg';
+import PopupProps from './interfaces';
+import Styles from './popup.styles';
+import usePopup from './hooks/usePopup';
+import {Box} from '../controllers/box/box';
+import TextFactory from '../factories/text-factory/text-factory';
 
 const Popup = ({
   isVisible,
@@ -26,12 +26,12 @@ const Popup = ({
   return (
     <Modal
       visible={isVisible}
-      backdropStyle={Styles.backdrop}
-      onBackdropPress={animatSlideDown}
-      shouldUseContainer={false}
+      // backdropStyle={Styles.backdrop}
+      // onBackdropPress={animatSlideDown}
+      //shouldUseContainer={false}
     >
       <Animated.View
-        onLayout={(event) => {
+        onLayout={event => {
           animatSlideUp(event.nativeEvent.layout.height);
         }}
         style={[
@@ -43,8 +43,7 @@ const Popup = ({
               },
             ],
           },
-        ]}
-      >
+        ]}>
         <Box style={Styles.container}>
           <Box style={Styles.top}>
             <Box style={Styles.end} />
@@ -61,8 +60,7 @@ const Popup = ({
                 onPress={() => {
                   animatSlideDown();
                 }}
-                style={Styles.closeButton}
-              >
+                style={Styles.closeButton}>
                 <Close />
               </Box>
             ) : (

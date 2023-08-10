@@ -1,49 +1,36 @@
-import {
-  View,
-  Text,
-  Animated,
-  Easing,
-  Dimensions,
-  StatusBar,
-  Platform,
-} from "react-native";
-import React, {useEffect, useRef, useState} from "react";
-import usePopupProps from "./interfaces";
-import AnimationService from "@traveloffline/services/common/animation-service";
-import Styles from "../popup.styles";
+import {Animated, Dimensions, Platform} from 'react-native';
+import {useRef} from 'react';
+import usePopupProps from './interfaces';
+import Styles from '../popup.styles';
 
 const usePopup = (props: usePopupProps) => {
   const slideAnim = useRef(new Animated.Value(0)).current;
 
-  let deviceH = Dimensions.get("screen").height;
-  let deviceW = Dimensions.get("window").height;
+  let deviceH = Dimensions.get('screen').height;
+  let deviceW = Dimensions.get('window').height;
   let diff = deviceH - deviceW;
 
   const animatSlideDown = () => {
-    new AnimationService({
+    Animated.timing(slideAnim, {
       toValue: 0,
       duration: props.durationEnter,
       useNativeDriver: true,
-    })
-      .create(slideAnim)
-      .start(() => {
-        props.onClickClose && props.onClickClose();
-      });
+    }).start(() => {
+      props.onClickClose && props.onClickClose();
+    });
   };
 
-  const animatSlideUp = (height) => {
+  const animatSlideUp = (height: number) => {
     let finalheight =
-      Platform.OS === "ios"
+      Platform.OS === 'ios'
         ? -height - diff - Styles.content.marginTop
         : -height - diff;
 
-    new AnimationService({
+    Animated.timing(slideAnim, {
       toValue: finalheight,
       duration: props.durationExit,
       useNativeDriver: true,
-    })
-      .create(slideAnim)
-      .start();
+    }).start();
   };
 
   return {
