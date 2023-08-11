@@ -3,12 +3,13 @@ import {StyleSheet} from 'react-native';
 
 export default StyleSheet.create({
   button: {
-    backgroundColor: GlobalColors.buttonColors.primary,
-    paddingHorizontal: 52,
-    paddingVertical: 15,
+    backgroundColor: GlobalColors.buttonColors.gray,
+    paddingHorizontal: 7,
+    paddingVertical: 7,
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 50,
+    borderRadius: 60,
+    flexDirection: 'row',
   },
   text: {
     color: GlobalColors.TextColors.white,

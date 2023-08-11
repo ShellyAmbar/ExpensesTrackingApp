@@ -5,8 +5,9 @@ export const GlobalColors = {
   },
   BgColors: {
     primary: '#FCFBFC',
-    secondry: '#F4EEEE',
-    secion: '#rgba(0,0,0,0.8)',
+
+    secondery: '#rgba(0,0,0,0.8)',
+    secion: '#F4EEEE',
     backdrop: '#rgba(0,0,0,0.5)',
   },
   buttonColors: {

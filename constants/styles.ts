@@ -56,7 +56,7 @@ const Styles = {
   },
   H10: {
     fontFamily: 'Helvetica',
-    fontStyle: 'normal',
+    //fontStyle: 'normal',
     fontWeight: 'bold',
     fontSize: 12,
     color: GlobalColors.TextColors.primary,
