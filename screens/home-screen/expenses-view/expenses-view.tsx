@@ -19,6 +19,8 @@ const ExpensesView = () => {
     totalExpenses,
     visiblePopup,
     setVisiblePopup,
+    selectedExpanseToupdate,
+    setSelectedExpanseToupdate,
   } = useExpensesView();
   return (
     <Box style={styles.container}>
@@ -33,7 +35,12 @@ const ExpensesView = () => {
         <Popup
           onClickClose={() => setVisiblePopup(PopupType.Empthy)}
           isVisible={visiblePopup === PopupType.UpdateExpanse}>
-          <PopupUpdate />
+          <PopupUpdate
+            item={selectedExpanseToupdate}
+            onSubmit={() => {
+              setVisiblePopup(PopupType.Empthy);
+            }}
+          />
         </Popup>
       )}
       <Box style={styles.horizontalStart}>
@@ -64,7 +71,10 @@ const ExpensesView = () => {
           <ExpensesItem
             key={item.id}
             item={item}
-            onPressItem={() => setVisiblePopup(PopupType.FilterExpance)}
+            onPressItem={expense => {
+              setSelectedExpanseToupdate(expense);
+              setVisiblePopup(PopupType.UpdateExpanse);
+            }}
           />
         )}
         style={styles.container}

@@ -5,10 +5,11 @@ import TextFactory from '@ExpensesTracking/components/factories/text-factory/tex
 import TextInput from '@ExpensesTracking/components/controllers/text-input/text-input';
 import Spacer from '@ExpensesTracking/components/controllers/spacer/spacer';
 import ButtonFactory from '@ExpensesTracking/components/factories/button-factory/button-factory';
-const PopupUpdate = () => {
+import PopupUpdateProps from './interfaces';
+const PopupUpdate = ({item, onSubmit, ...props}: PopupUpdateProps) => {
   return (
     <Box style={styles.container}>
-      <TextFactory style={styles.titel}>{'Edit Expense'}</TextFactory>
+      <TextFactory style={styles.titel}>{'Update Expense'}</TextFactory>
       <Spacer size={26} />
       <TextInput
         placeholder="Title"

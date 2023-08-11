@@ -24,6 +24,8 @@ const useExpensesView = (props?: UseExpensesViewProps) => {
   const [expenses, setExpenses] = useState<ExpenseItem[]>(list);
   const [totalExpenses, setTotalExpenses] = useState(0);
   const [visiblePopup, setVisiblePopup] = useState(PopupType.Empthy);
+  const [selectedExpanseToupdate, setSelectedExpanseToupdate] =
+    useState<Expense>();
 
   const getTotalExpenses = () => {
     let totalExpenses = 0;
@@ -49,6 +51,8 @@ const useExpensesView = (props?: UseExpensesViewProps) => {
     totalExpenses,
     visiblePopup,
     setVisiblePopup,
+    selectedExpanseToupdate,
+    setSelectedExpanseToupdate,
   };
 };
 

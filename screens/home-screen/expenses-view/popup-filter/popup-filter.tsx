@@ -9,7 +9,7 @@ import ButtonFactory from '@ExpensesTracking/components/factories/button-factory
 const PopupFilter = () => {
   return (
     <Box style={styles.container}>
-      <TextFactory style={styles.titel}>{'Edit Expense'}</TextFactory>
+      <TextFactory style={styles.titel}>{'Filter Expenses'}</TextFactory>
       <Spacer size={26} />
       <TextInput
         placeholder="Title"
