@@ -1,7 +1,7 @@
 import {Animated, Modal} from 'react-native';
 import React from 'react';
 
-import Close from '@mygenes/assets/images/close-small.svg';
+import Close from '@ExpensesTracking/assets/images/close.svg';
 import PopupProps from './interfaces';
 import Styles from './popup.styles';
 import usePopup from './hooks/usePopup';
@@ -24,12 +24,9 @@ const Popup = ({
   });
 
   return (
-    <Modal
-      visible={isVisible}
-      // backdropStyle={Styles.backdrop}
-      // onBackdropPress={animatSlideDown}
-      //shouldUseContainer={false}
-    >
+    <Modal visible={isVisible} onRequestClose={onClickClose} transparent={true}>
+      <Box style={Styles.backdrop} />
+
       <Animated.View
         onLayout={event => {
           animatSlideUp(event.nativeEvent.layout.height);
@@ -49,7 +46,7 @@ const Popup = ({
             <Box style={Styles.end} />
 
             {title ? (
-              <TextFactory style={[titleStyle, Styles.title]}>
+              <TextFactory style={{...titleStyle, ...Styles.title}}>
                 {title}
               </TextFactory>
             ) : (

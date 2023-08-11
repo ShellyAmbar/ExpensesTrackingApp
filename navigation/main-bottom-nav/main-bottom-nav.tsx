@@ -4,54 +4,72 @@ import ProfileScreen from '@ExpensesTracking/screens/profile-screen/profile-scre
 import ButtonFactory from '@ExpensesTracking/components/factories/button-factory/button-factory';
 import Plus from '@ExpensesTracking/assets/images/plus.svg';
 import styles from './main-bottom-nav.styles';
+import useMainBottomNav from './hooks/useMainBottomNav';
+import Popup from '@ExpensesTracking/components/popup/popup';
+import CreateNewExpense from './create-new-expense/create-new-expense';
+import {Box} from '@ExpensesTracking/components/controllers/box/box';
+import {width} from '@ExpensesTracking/constants/styles';
 
 const Tab = createBottomTabNavigator();
 
 const MainBottomNav = () => {
+  const {isShowPopupCreateExpense, setIsShowPopupCreateExpense} =
+    useMainBottomNav();
   return (
-    <Tab.Navigator
-      screenOptions={{
-        tabBarShowLabel: true,
-        tabBarStyle: styles.tabBarStyle,
-        tabBarItemStyle: styles.tabBarItemStyle,
-        tabBarLabelStyle: styles.tabBarLabelStyle,
+    <>
+      {isShowPopupCreateExpense && (
+        <Popup
+          onClickClose={() => setIsShowPopupCreateExpense(false)}
+          isVisible={isShowPopupCreateExpense}>
+          <CreateNewExpense />
+        </Popup>
+      )}
+      <Tab.Navigator
+        screenOptions={{
+          tabBarShowLabel: true,
+          tabBarStyle: styles.tabBarStyle,
+          tabBarItemStyle: styles.tabBarItemStyle,
+          tabBarLabelStyle: styles.tabBarLabelStyle,
 
-        tabBarActiveTintColor: styles.tabBarActiveTintColor.color,
-        tabBarInactiveTintColor: styles.tabBarInactiveTintColor.color,
-      }}>
-      <Tab.Screen
-        options={{headerShown: false, tabBarIcon: () => null}}
-        name="Home">
-        {HomeScreen}
-      </Tab.Screen>
+          tabBarActiveTintColor: styles.tabBarActiveTintColor.color,
+          tabBarInactiveTintColor: styles.tabBarInactiveTintColor.color,
+        }}>
+        <Tab.Screen
+          options={{headerShown: false, tabBarIcon: () => null}}
+          name="Home">
+          {HomeScreen}
+        </Tab.Screen>
 
-      <Tab.Screen
-        options={{
-          headerShown: false,
-          tabBarShowLabel: false,
+        <Tab.Screen
+          options={{
+            headerShown: false,
+            tabBarShowLabel: false,
 
-          tabBarButton: props => (
-            <ButtonFactory
-              {...props}
-              style={{top: -24}}
-              type="floating"
-              onPress={() => {}}>
-              <Plus />
-            </ButtonFactory>
-          ),
-        }}
-        name="Create">
-        {() => null}
-      </Tab.Screen>
-      <Tab.Screen
-        options={{
-          headerShown: false,
-          tabBarIcon: () => null,
-        }}
-        name="Profile">
-        {ProfileScreen}
-      </Tab.Screen>
-    </Tab.Navigator>
+            tabBarButton: props => (
+              <ButtonFactory
+                {...props}
+                style={{top: -24}}
+                type="floating"
+                onPress={() => {
+                  setIsShowPopupCreateExpense(true);
+                }}>
+                <Plus />
+              </ButtonFactory>
+            ),
+          }}
+          name="Create">
+          {() => null}
+        </Tab.Screen>
+        <Tab.Screen
+          options={{
+            headerShown: false,
+            tabBarIcon: () => null,
+          }}
+          name="Profile">
+          {ProfileScreen}
+        </Tab.Screen>
+      </Tab.Navigator>
+    </>
   );
 };
 

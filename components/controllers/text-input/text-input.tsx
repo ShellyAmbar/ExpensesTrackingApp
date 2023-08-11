@@ -15,7 +15,7 @@ const TextInput = ({
   ...props
 }: TextInputProps) => {
   return (
-    <Box>
+    <Box style={Styles.container}>
       {label && <Text style={[Styles.title]}>{label}</Text>}
       <Spacer size={8} />
       <RNTextInput

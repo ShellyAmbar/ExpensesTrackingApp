@@ -4,9 +4,10 @@ export const GlobalColors = {
     secondary: 'rgba(0,0,0,0.8)',
   },
   BgColors: {
-    primary: '#FFFFFF',
+    primary: '#FCFBFC',
     secondry: '#F4EEEE',
     secion: '#rgba(0,0,0,0.8)',
+    backdrop: '#rgba(0,0,0,0.5)',
   },
   buttonColors: {
     primary: '#5B58AD',
@@ -19,7 +20,9 @@ export const GlobalColors = {
     third: '#3E3E3E',
     forth: '#393939',
     gray: '#8C8C8C',
+    gray2: '#A6A6A6',
     lightGray: '#AAA9C0',
+
     unSelected: '#696969',
     selected: '#455EFF',
 

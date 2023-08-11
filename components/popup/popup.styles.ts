@@ -5,20 +5,22 @@ import {Dimensions, I18nManager, StyleSheet} from 'react-native';
 export default StyleSheet.create({
   backdrop: {
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    flex: 1,
   },
   container: {
     justifyContent: 'center',
     alignItems: 'center',
     zIndex: 2,
+    width: '100%',
   },
   halfCircularRectView: {
     zIndex: 2,
     position: 'absolute',
     width: width,
     top: Dimensions.get('screen').height,
-    paddingHorizontal: 15,
-    borderTopLeftRadius: 24,
-    borderTopRightRadius: 24,
+    paddingHorizontal: 32,
+    borderTopLeftRadius: 22,
+    borderTopRightRadius: 22,
     backgroundColor: GlobalColors.BgColors.primary,
     justifyContent: 'center',
     alignItems: 'center',
@@ -36,7 +38,7 @@ export default StyleSheet.create({
     height: 32,
   },
   title: {
-    ...Styles.H5,
+    // ...Styles.H5,
     width: '100%',
     flex: 1,
     textAlign: 'center',
