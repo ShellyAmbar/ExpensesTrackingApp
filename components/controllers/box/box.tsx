@@ -1,23 +1,23 @@
 import React, {forwardRef} from 'react';
-import {Pressable, ScrollView, TouchableOpacity, View} from 'react-native';
+import {
+  FlatList,
+  Pressable,
+  ScrollView,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 
 import {boxProps} from './interfaces';
 
 export const Box = forwardRef((props: boxProps, ref?: any): JSX.Element => {
   const BoxView = props.scroll ? (
-    <ScrollView
-      {...props}
-      ref={ref}
-      contentContainerStyle={[
-        props.contentContainerStyle && props.contentContainerStyle,
-      ]}
-      horizontal={props.horizontal}
-      showsVerticalScrollIndicator={props.showsVerticalScrollIndicator ?? true}
-      showsHorizontalScrollIndicator={
-        props.showsHorizontalScrollIndicator ?? true
-      }>
+    <ScrollView {...props} ref={ref}>
       {props.children}
     </ScrollView>
+  ) : props.flatList ? (
+    <FlatList {...props} ref={ref}>
+      {props.children}
+    </FlatList>
   ) : (
     <View {...props} ref={props.ref} style={props?.style && props?.style}>
       {props.children}

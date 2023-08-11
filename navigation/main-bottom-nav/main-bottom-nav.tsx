@@ -6,9 +6,7 @@ import Plus from '@ExpensesTracking/assets/images/plus.svg';
 import styles from './main-bottom-nav.styles';
 import useMainBottomNav from './hooks/useMainBottomNav';
 import Popup from '@ExpensesTracking/components/popup/popup';
-import CreateNewExpense from './create-new-expense/create-new-expense';
-import {Box} from '@ExpensesTracking/components/controllers/box/box';
-import {width} from '@ExpensesTracking/constants/styles';
+import PopupCreateNewExpense from './popup-create-new-expense/popup-create-new-expense';
 
 const Tab = createBottomTabNavigator();
 
@@ -21,7 +19,7 @@ const MainBottomNav = () => {
         <Popup
           onClickClose={() => setIsShowPopupCreateExpense(false)}
           isVisible={isShowPopupCreateExpense}>
-          <CreateNewExpense />
+          <PopupCreateNewExpense />
         </Popup>
       )}
       <Tab.Navigator

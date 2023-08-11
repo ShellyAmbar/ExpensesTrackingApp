@@ -1,15 +1,20 @@
 import {GlobalColors} from '@ExpensesTracking/constants/colors';
-import Styles, {height, width} from '@ExpensesTracking/constants/styles';
+import Styles, {width} from '@ExpensesTracking/constants/styles';
+
 import {StyleSheet} from 'react-native';
 
 export default StyleSheet.create({
   container: {
+    width: '100%',
     justifyContent: 'flex-start',
     flexDirection: 'column',
-
     alignItems: 'center',
-    width: width,
-    height: height,
-    backgroundColor: GlobalColors.BgColors.primary,
+  },
+  titel: {
+    ...Styles.H4,
+    textAlign: 'center',
+  },
+  placeholder: {
+    color: GlobalColors.TextColors.gray2,
   },
 });
