@@ -11,6 +11,7 @@ const TextInput = ({
   label,
 
   onChangeText,
+  style,
   ...props
 }: TextInputProps) => {
   return (
@@ -19,7 +20,7 @@ const TextInput = ({
       <Spacer size={8} />
       <RNTextInput
         {...props}
-        style={[{...Styles.textInput}, {...props.style}]}
+        style={[{...Styles.textInput}, {...style}]}
         onChangeText={onChangeText}
       />
     </Box>

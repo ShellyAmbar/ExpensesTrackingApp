@@ -3,7 +3,7 @@ import {StyleSheet} from 'react-native';
 
 export default StyleSheet.create({
   textInput: {
-    borde: 1,
+    borderBottomWidth: 1,
     width: '100%',
 
     backgroundColor: GlobalColors.BgColors.primary,

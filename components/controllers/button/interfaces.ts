@@ -1,7 +1,7 @@
-import {TextProps, TouchableOpacityProps, ViewProps} from 'react-native';
+import {TextStyle, TouchableOpacityProps, ViewStyle} from 'react-native';
 
 export default interface ButtonProps extends TouchableOpacityProps {
-  label: string;
-  lableStyle: TextProps;
-  style: ViewProps;
+  label?: string;
+  lableStyle?: TextStyle;
+  style?: ViewStyle;
 }

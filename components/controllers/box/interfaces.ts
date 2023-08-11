@@ -1,6 +1,7 @@
 import {
   ScrollViewProps,
   TextProps,
+  TextStyle,
   TouchableOpacityProps,
   ViewProps,
   ViewStyle,
@@ -9,7 +10,8 @@ import ButtonProps from '../button/interfaces';
 
 export type boxProps = ViewProps &
   TouchableOpacityProps &
-  ScrollViewProps & {
+  ScrollViewProps &
+  ButtonProps & {
     scroll?: boolean;
     horizontal?: boolean;
     ref?: any;

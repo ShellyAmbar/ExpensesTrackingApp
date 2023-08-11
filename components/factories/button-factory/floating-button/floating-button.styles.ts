@@ -3,15 +3,10 @@ import {StyleSheet} from 'react-native';
 
 export default StyleSheet.create({
   container: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: '100%',
-    height: '100%',
-    backgroundColor: GlobalColors.BgColors.primary,
-  },
-  lottie: {
-    width: '100%',
-    height: 400,
+    width: 56,
+    height: 56,
+    backgroundColor: GlobalColors.buttonColors.secondery,
+    borderRadius: 34,
     justifyContent: 'center',
     alignItems: 'center',
   },

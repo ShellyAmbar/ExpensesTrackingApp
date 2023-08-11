@@ -6,6 +6,7 @@ export default StyleSheet.create({
     borderWidth: 0,
     backgroundColor: GlobalColors.buttonColors.primary,
     borderRadius: 50,
+    width: '100%',
   },
   text: {
     color: GlobalColors.TextColors.white,

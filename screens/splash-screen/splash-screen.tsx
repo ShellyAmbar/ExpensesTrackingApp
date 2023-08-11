@@ -2,13 +2,14 @@ import React, {useEffect, useRef} from 'react';
 import {Box} from '../../components/controllers/box/box';
 import LottieView from 'lottie-react-native';
 import Styles from './splash-screen.styles';
+import {Text, View} from 'react-native';
 
-const SplashScreen = (props: any) => {
+const SplashScreen = (props?: any) => {
   const animation = useRef(null);
 
   useEffect(() => {
     const timeout = setTimeout(() => {
-      //  props.navigation.navigate('Auth');
+      props?.navigation.navigate('Auth');
     }, 1500);
     return () => clearTimeout(timeout);
   }, []);
@@ -16,15 +17,15 @@ const SplashScreen = (props: any) => {
   useEffect(() => {}, []);
 
   return (
-    <Box style={Styles.container}>
-      {/* <LottieView
+    <View style={Styles.container}>
+      <LottieView
         autoPlay
         ref={animation}
         style={Styles.lottie}
-        source={require('@ExpensesTracking/assets/lotties/chart-lottie.json')}
+        source={require('../../assets/lotties/chart-lottie.json')}
         loop
-      /> */}
-    </Box>
+      />
+    </View>
   );
 };
 

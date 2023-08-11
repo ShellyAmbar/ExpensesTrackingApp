@@ -1,12 +1,10 @@
-import {View, Text} from 'react-native';
 import React from 'react';
+import Button from '@ExpensesTracking/components/controllers/button/button';
+import ButtonProps from '@ExpensesTracking/components/controllers/button/interfaces';
+import styles from './primary-button.styles';
 
-const PrimaryButton = () => {
-  return (
-    <View>
-      <Text></Text>
-    </View>
-  );
+const PrimaryButton = (props: ButtonProps) => {
+  return <Button {...props} style={styles.button} lableStyle={styles.text} />;
 };
 
 export default PrimaryButton;

@@ -2,14 +2,14 @@ import ButtonProps from '@ExpensesTracking/components/controllers/button/interfa
 import {TextStyle, TouchableOpacityProps, ViewStyle} from 'react-native';
 type ButtonFactoryProps =
   | ({
-      type: 'primary' | 'secondary' | 'plus';
-      label: string;
+      type?: 'primary' | 'secondary' | 'floating';
+      label?: string;
       style?: ViewStyle;
       lableStyle?: TextStyle;
-    } & TouchableOpacityProps)
+    } & ButtonProps)
   | ({
       type?: 'default';
-      label: string;
+      label?: string;
       style?: ViewStyle;
       lableStyle?: TextStyle;
     } & ButtonProps);

@@ -3,7 +3,7 @@ import {Pressable, ScrollView, TouchableOpacity, View} from 'react-native';
 
 import {boxProps} from './interfaces';
 
-export const Box = forwardRef((props: boxProps, ref: any): JSX.Element => {
+export const Box = forwardRef((props: boxProps, ref?: any): JSX.Element => {
   const BoxView = props.scroll ? (
     <ScrollView
       {...props}
