@@ -11,6 +11,7 @@ export default StyleSheet.create({
   },
   contentContainer: {
     width: '100%',
+    paddingBottom: 300,
   },
 
   horizontalSpaced: {

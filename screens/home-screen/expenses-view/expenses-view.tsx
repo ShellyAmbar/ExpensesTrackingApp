@@ -88,12 +88,7 @@ const ExpensesView = observer(() => {
         flatList
         ref={() => {}}
         data={expenses.slice().sort((objA, objB) => {
-          console.log(new Date().getMilliseconds());
-
-          return (
-            new Date(objA.date).getMilliseconds() -
-            new Date(objB.date).getMilliseconds()
-          );
+          return Number(objB.date) - Number(objA.date);
         })}
         renderItem={({item, index}: {item: ExpenseItem; index: number}) => (
           <ExpensesItem

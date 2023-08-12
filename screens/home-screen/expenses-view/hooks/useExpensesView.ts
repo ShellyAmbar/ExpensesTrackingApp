@@ -2,6 +2,7 @@ import {useEffect, useState} from 'react';
 import {Currency, Expense, ExpenseItem} from '../expenses-item/interfaces';
 import {PopupType, UseExpensesViewProps} from './interfaces';
 import {useStore} from '@ExpensesTracking/store';
+import moment from 'moment';
 
 const useExpensesView = (props?: UseExpensesViewProps) => {
   const rootStore = useStore();
@@ -49,11 +50,16 @@ const useExpensesView = (props?: UseExpensesViewProps) => {
   const filterExpenses = () => {
     const filters = rootStore.user.filters;
     let filteredList = rootStore.user.expenses;
+    console.log(filters);
+
     if (filters.date) {
-      filteredList = filteredList?.filter(
-        expensesItem =>
-          expensesItem.date.toString() === filters.date?.toString(),
-      );
+      filteredList = filteredList?.filter(expensesItem => {
+        console.log(expensesItem.date, filters.date);
+        return (
+          moment(expensesItem.date).format('DD/MM/YYYY') ===
+          moment(filters.date).format('DD/MM/YYYY')
+        );
+      });
     }
     if (filters.titel) {
       filteredList = filteredList?.filter(expensesItem => {
