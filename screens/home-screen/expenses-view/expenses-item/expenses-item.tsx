@@ -4,12 +4,15 @@ import {ExpensesItemProps} from './interfaces';
 import styles from './expenses-item.styles';
 import TextFactory from '@ExpensesTracking/components/factories/text-factory/text-factory';
 import ExpenseItem from './expense-item/expense-item';
+import moment from 'moment';
 
 const ExpensesItem = ({item, onPressItem, ...props}: ExpensesItemProps) => {
   return (
     <Box style={styles.container}>
       <Box style={[styles.horizontalStart, styles.dateView]}>
-        <TextFactory style={styles.date}>{item.date}</TextFactory>
+        <TextFactory style={styles.date}>
+          {moment(item.date).format('DD/MM/YYYY')}
+        </TextFactory>
       </Box>
       <Box style={styles.listContainer}>
         <>

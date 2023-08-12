@@ -51,7 +51,8 @@ const useExpensesView = (props?: UseExpensesViewProps) => {
     let filteredList = rootStore.user.expenses;
     if (filters.date) {
       filteredList = filteredList?.filter(
-        expensesItem => expensesItem.date === filters.date,
+        expensesItem =>
+          expensesItem.date.toString() === filters.date?.toString(),
       );
     }
     if (filters.titel) {
@@ -70,6 +71,7 @@ const useExpensesView = (props?: UseExpensesViewProps) => {
         );
       });
     }
+
     setExpenses(filteredList);
   };
 

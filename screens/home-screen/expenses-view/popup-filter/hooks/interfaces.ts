@@ -5,6 +5,6 @@ enum Filters {
 }
 
 type UsePopupFilterProps = {};
-type FilterValue = 'string' | 'number';
+type FilterValue = string | number | Date;
 
 export {Filters, UsePopupFilterProps, FilterValue};

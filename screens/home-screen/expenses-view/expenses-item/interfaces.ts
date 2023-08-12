@@ -7,11 +7,11 @@ type Expense = {
   name: string;
   amount: string;
   currency: Currency;
-  date: string;
+  date: Date;
 };
 type ExpenseItem = {
   id: number;
-  date: string;
+  date: Date;
   expenses: Expense[];
 };
 type ExpensesItemProps = {

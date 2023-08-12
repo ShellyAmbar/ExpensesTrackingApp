@@ -7,15 +7,15 @@ export type Expense = {
   name: string;
   amount: string;
   currency: Currency;
-  date: string;
+  date: Date;
 };
 export type ExpenseItem = {
   id: number;
-  date: string;
+  date: Date;
   expenses: Expense[];
 };
 export type ExpenseFilters = {
   titel?: string;
   amount?: string;
-  date?: string;
+  date?: Date;
 };

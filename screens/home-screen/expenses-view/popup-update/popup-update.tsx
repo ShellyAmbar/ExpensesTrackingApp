@@ -6,9 +6,29 @@ import TextInput from '@ExpensesTracking/components/controllers/text-input/text-
 import Spacer from '@ExpensesTracking/components/controllers/spacer/spacer';
 import ButtonFactory from '@ExpensesTracking/components/factories/button-factory/button-factory';
 import PopupUpdateProps from './interfaces';
+import moment from 'moment';
+import Popup from '@ExpensesTracking/components/popup/popup';
+import usePopupUpdate from './hooks/usePopupUpdate';
+import DatePickerView from '@ExpensesTracking/components/date-picker-view/date-picker-view';
 const PopupUpdate = ({item, onSubmit, ...props}: PopupUpdateProps) => {
+  const {openDatePicker, setOpenDatePicker} = usePopupUpdate();
   return (
     <Box style={styles.container}>
+      {openDatePicker && (
+        <Popup
+          onClickClose={() => {
+            setOpenDatePicker(false);
+          }}
+          isVisible={openDatePicker}>
+          <DatePickerView
+            onConfirm={date => {
+              item.date = date;
+              setOpenDatePicker(false);
+            }}
+          />
+        </Popup>
+      )}
+
       <Spacer size={50} />
       <TextFactory style={styles.titel}>{'Edit Expense'}</TextFactory>
 
@@ -40,9 +60,10 @@ const PopupUpdate = ({item, onSubmit, ...props}: PopupUpdateProps) => {
         label="Date"
         lableStyle={styles.lable}
         inputStyle={styles.textInput}
-        defaultValue={item.date ?? ''}
-        onChangeText={date => {
-          item.date = date;
+        defaultValue={item.date ? moment(item.date).format('DD/MM/YYYY') : ''}
+        onChangeText={() => {}}
+        onPressIn={() => {
+          setOpenDatePicker(true);
         }}
       />
       <Spacer size={235} />

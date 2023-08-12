@@ -9,15 +9,43 @@ import {Expense, ExpenseItem} from '@ExpensesTracking/store/data/expanses';
 import {useStore} from '@ExpensesTracking/store';
 import usePopupCreateExpense from './hooks/usePopupCreateExpense';
 import {PopupCreateNewExpenseProps} from './interfaces';
+import DatePicker from 'react-native-date-picker';
+import Popup from '@ExpensesTracking/components/popup/popup';
+import {width} from '@ExpensesTracking/constants/styles';
+import {GlobalColors} from '@ExpensesTracking/constants/colors';
+import moment from 'moment';
+import DatePickerView from '@ExpensesTracking/components/date-picker-view/date-picker-view';
 
 const PopupCreateNewExpense = ({
   onClose,
   ...props
 }: PopupCreateNewExpenseProps) => {
-  const {newExpense, setNewExpense, createExpense} = usePopupCreateExpense();
+  const {
+    newExpense,
+    setNewExpense,
+    createExpense,
+    openDatePicker,
+    setOpenDatePicker,
+  } = usePopupCreateExpense();
 
   return (
     <Box style={styles.container}>
+      {openDatePicker && (
+        <Popup
+          onClickClose={() => {
+            setOpenDatePicker(false);
+          }}
+          isVisible={openDatePicker}>
+          <DatePickerView
+            onConfirm={date => {
+              (newExpense as Expense).date = date;
+              setNewExpense({...(newExpense as Expense)});
+              setOpenDatePicker(false);
+            }}
+          />
+        </Popup>
+      )}
+
       <TextFactory style={styles.titel}>{'Create Expense'}</TextFactory>
       <Spacer size={26} />
       <TextInput
@@ -41,12 +69,15 @@ const PopupCreateNewExpense = ({
       />
       <Spacer size={27} />
       <TextInput
+        value={
+          newExpense.date ? moment(newExpense.date).format('DD/MM/YYYY') : ''
+        }
         placeholder="Date"
         inputStyle={styles.textInput}
         placeholderTextColor={styles.placeholder.color}
-        onChangeText={text => {
-          (newExpense as Expense).date = text;
-          setNewExpense({...(newExpense as Expense)});
+        onChangeText={text => {}}
+        onPressIn={() => {
+          setOpenDatePicker(true);
         }}
       />
       <Spacer size={235} />
