@@ -10,39 +10,45 @@ const PopupUpdate = ({item, onSubmit, ...props}: PopupUpdateProps) => {
   return (
     <Box style={styles.container}>
       <Spacer size={50} />
-      <TextFactory style={styles.titel}>{'Update Expense'}</TextFactory>
-      <Spacer size={26} />
+      <TextFactory style={styles.titel}>{'Edit Expense'}</TextFactory>
+
       <TextInput
-        placeholder="Title"
-        placeholderTextColor={styles.placeholder.color}
+        label="Title"
+        lableStyle={styles.lable}
+        inputStyle={styles.textInput}
+        defaultValue={item.name ?? ''}
         onChangeText={titel => {
           item.name = titel;
         }}
       />
-      <Spacer size={26} />
-      <Spacer size={26} />
+      <Spacer size={27} />
+
       <TextInput
-        placeholder="Amount"
-        placeholderTextColor={styles.placeholder.color}
+        label="Amount"
+        lableStyle={styles.lable}
+        inputStyle={styles.textInput}
+        defaultValue={item.amount ?? ''}
         onChangeText={amount => {
           if (amount?.length > 0) {
             item.amount = amount;
           }
         }}
       />
-      <Spacer size={26} />
-      <Spacer size={26} />
+      <Spacer size={27} />
+
       <TextInput
-        placeholder="Date"
-        placeholderTextColor={styles.placeholder.color}
+        label="Date"
+        lableStyle={styles.lable}
+        inputStyle={styles.textInput}
+        defaultValue={item.date ?? ''}
         onChangeText={date => {
           item.date = date;
         }}
       />
-      <Spacer size={208 + 19 + 8} />
+      <Spacer size={235} />
       <ButtonFactory
         type="primary"
-        label="Create"
+        label="Save"
         onPress={() => onSubmit(item)}
       />
       <Spacer size={62} />

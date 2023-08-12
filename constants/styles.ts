@@ -23,7 +23,7 @@ const Styles = {
     //   fontStyle: 'normal',
     fontSize: 18,
     lineHeight: 18,
-    textAlign: 'right',
+    // textAlign: 'right',
     color: GlobalColors.TextColors.primary,
   },
   H7: {

@@ -21,10 +21,7 @@ const usePopup = (props: usePopupProps) => {
   };
 
   const animatSlideUp = (height: number) => {
-    let finalheight =
-      Platform.OS === 'ios'
-        ? -height - diff - Styles.content.marginTop
-        : -height - diff;
+    let finalheight = -height - diff;
 
     Animated.timing(slideAnim, {
       toValue: finalheight,

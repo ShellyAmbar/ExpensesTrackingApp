@@ -18,38 +18,38 @@ const PopupCreateNewExpense = ({
 
   return (
     <Box style={styles.container}>
-      <Spacer size={50} />
       <TextFactory style={styles.titel}>{'Create Expense'}</TextFactory>
       <Spacer size={26} />
       <TextInput
         placeholder="Title"
+        inputStyle={styles.textInput}
         placeholderTextColor={styles.placeholder.color}
         onChangeText={text => {
           (newExpense as Expense).name = text;
           setNewExpense({...(newExpense as Expense)});
         }}
       />
-      <Spacer size={26} />
-      <Spacer size={26} />
+      <Spacer size={27} />
       <TextInput
         placeholder="Amount"
+        inputStyle={styles.textInput}
         placeholderTextColor={styles.placeholder.color}
         onChangeText={text => {
           (newExpense as Expense).amount = text;
           setNewExpense({...(newExpense as Expense)});
         }}
       />
-      <Spacer size={26} />
-      <Spacer size={26} />
+      <Spacer size={27} />
       <TextInput
         placeholder="Date"
+        inputStyle={styles.textInput}
         placeholderTextColor={styles.placeholder.color}
         onChangeText={text => {
           (newExpense as Expense).date = text;
           setNewExpense({...(newExpense as Expense)});
         }}
       />
-      <Spacer size={208 + 19 + 8} />
+      <Spacer size={235} />
       <ButtonFactory
         type="primary"
         label="Create"

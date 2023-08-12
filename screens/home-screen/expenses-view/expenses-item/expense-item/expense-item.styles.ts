@@ -8,7 +8,8 @@ export default StyleSheet.create({
     justifyContent: 'space-between',
     width: '100%',
     paddingVertical: 23,
-    paddingHorizontal: 16,
+    paddingStart: 16,
+    paddingEnd: 24,
   },
 
   title: {

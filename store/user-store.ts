@@ -2,6 +2,7 @@ import {
   ExpenseFilters,
   ExpenseItem,
 } from '@ExpensesTracking/store/data/expanses';
+import {makeAutoObservable} from 'mobx';
 
 export class UserStore {
   fullName: string;
@@ -16,6 +17,7 @@ export class UserStore {
     this.isLoggedIn = false;
     this.totalExpenses = 0;
     this.filters = {};
+    makeAutoObservable(this);
   }
 
   setFullName(fullName: string) {

@@ -9,6 +9,11 @@ export default StyleSheet.create({
     justifyContent: 'flex-start',
     flexDirection: 'column',
     alignItems: 'center',
+    paddingHorizontal: 32,
+  },
+  textInput: {
+    ...Styles.H7,
+    color: GlobalColors.TextColors.primary,
   },
   titel: {
     ...Styles.H4,

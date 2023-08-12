@@ -7,6 +7,7 @@ import Styles from './popup.styles';
 import usePopup from './hooks/usePopup';
 import {Box} from '../controllers/box/box';
 import TextFactory from '../factories/text-factory/text-factory';
+import Spacer from '../controllers/spacer/spacer';
 
 const Popup = ({
   isVisible,
@@ -24,8 +25,20 @@ const Popup = ({
   });
 
   return (
-    <Modal visible={isVisible} onRequestClose={onClickClose} transparent={true}>
-      <Box style={Styles.backdrop} />
+    <Modal
+      visible={isVisible}
+      onRequestClose={() => {
+        console.log('close');
+
+        animatSlideDown();
+      }}
+      transparent={true}>
+      <Box
+        style={Styles.backdrop}
+        onPress={() => {
+          animatSlideDown();
+        }}
+      />
 
       <Animated.View
         onLayout={event => {
@@ -68,6 +81,7 @@ const Popup = ({
           )}
 
           <Box style={Styles.content}>{children}</Box>
+          <Spacer size={24} />
         </Box>
       </Animated.View>
     </Modal>

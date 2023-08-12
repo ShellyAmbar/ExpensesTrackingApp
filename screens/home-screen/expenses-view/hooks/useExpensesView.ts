@@ -8,13 +8,13 @@ const useExpensesView = (props?: UseExpensesViewProps) => {
   const [visiblePopup, setVisiblePopup] = useState(PopupType.Empthy);
   const [selectedExpanseToupdate, setSelectedExpanseToupdate] =
     useState<Expense>();
-  const [expenses, setExpenses] = useState(rootStore.user.expenses);
+  const [expenses, setExpenses] = useState<ExpenseItem[]>([]);
 
   const getTotalExpenses = () => {
     let totalExpenses = 0;
     for (let i = 0; i < rootStore.user.expenses?.length; i++) {
       const sum = rootStore.user.expenses[i].expenses?.reduce((acc, obj) => {
-        return acc + obj.amount;
+        return acc + Number(obj.amount);
       }, 0);
 
       totalExpenses += sum;
@@ -27,10 +27,23 @@ const useExpensesView = (props?: UseExpensesViewProps) => {
     const expensesItemWithExpense = rootStore.user.expenses?.filter(
       expensesItem => expensesItem.date === expenseToUpdate.date,
     );
-    const expenseIndexInList = expensesItemWithExpense[0].expenses?.findIndex(
-      expense => expense.id === expenseToUpdate.id,
-    );
-    expensesItemWithExpense[0].expenses[expenseIndexInList] = expenseToUpdate;
+
+    if (expensesItemWithExpense.length === 0) {
+      //creating new expenses item with the new date
+      const newExpansesItem: ExpenseItem = {
+        id: rootStore.user.expenses?.length,
+        date: expenseToUpdate.date,
+        expenses: [expenseToUpdate],
+      };
+      rootStore.user.expenses.push(newExpansesItem);
+    } else {
+      //update exist item
+      const expenseIndexInList = expensesItemWithExpense[0].expenses?.findIndex(
+        expense => expense.id === expenseToUpdate.id,
+      );
+
+      expensesItemWithExpense[0].expenses[expenseIndexInList] = expenseToUpdate;
+    }
   };
 
   const filterExpenses = () => {
@@ -67,7 +80,8 @@ const useExpensesView = (props?: UseExpensesViewProps) => {
   useEffect(() => {
     const total = getTotalExpenses();
     rootStore.user.setTotalExpenses(total);
-  }, []);
+    setExpenses(rootStore.user.expenses);
+  }, [JSON.stringify(rootStore.user.expenses)]);
 
   return {
     rootStore,

@@ -13,6 +13,7 @@ const TextInput = ({
   onChangeText,
   inputStyle,
   lableStyle,
+
   ...props
 }: TextInputProps) => {
   return (

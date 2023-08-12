@@ -15,6 +15,14 @@ export default StyleSheet.create({
     textAlign: 'center',
   },
   placeholder: {
-    color: GlobalColors.TextColors.gray2,
+    color: GlobalColors.TextColors.primary,
+  },
+  lable: {
+    ...Styles.H9,
+    color: GlobalColors.TextColors.gray,
+  },
+  textInput: {
+    ...Styles.H6,
+    color: GlobalColors.TextColors.primary,
   },
 });

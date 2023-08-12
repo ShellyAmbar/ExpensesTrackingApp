@@ -18,10 +18,14 @@ const MainBottomNav = () => {
     <>
       {isShowPopupCreateExpense && (
         <Popup
-          onClickClose={() => setIsShowPopupCreateExpense(false)}
+          onClickClose={() => {
+            setIsShowPopupCreateExpense(false);
+          }}
           isVisible={isShowPopupCreateExpense}>
           <PopupCreateNewExpense
-            onClose={() => setIsShowPopupCreateExpense(false)}
+            onClose={() => {
+              setIsShowPopupCreateExpense(false);
+            }}
           />
         </Popup>
       )}

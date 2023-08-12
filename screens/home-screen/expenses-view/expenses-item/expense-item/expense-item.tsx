@@ -8,13 +8,18 @@ const ExpenseItem = ({onPressItem, item, ...props}: ExpenseItemProps) => {
     <Box onPress={() => onPressItem(item)} style={styles.horizontalSpaced}>
       {item.name && <TextFactory style={styles.title}>{item.name}</TextFactory>}
       <Box style={styles.number}>
-        {item.amount && item.currency && (
-          <TextFactory
-            style={
-              styles.amount
-            }>{`${item.currency} ${item.amount}.`}</TextFactory>
+        {item.amount?.length > 0 && (
+          <TextFactory style={styles.amount}>
+            {item.amount?.includes('.')
+              ? `$${item.amount?.split('.')[0]}.`
+              : `$${item.amount}`}
+          </TextFactory>
         )}
-        <TextFactory style={styles.decimalNumbers}>{`${0}`}</TextFactory>
+        {item.amount?.includes('.') && (
+          <TextFactory style={styles.decimalNumbers}>{`${
+            item.amount?.split('.')[1]
+          }`}</TextFactory>
+        )}
       </Box>
     </Box>
   );

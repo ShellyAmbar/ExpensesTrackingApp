@@ -7,6 +7,6 @@ export default interface TextInputProps extends RNTextInputProps {
   disabled?: boolean;
   editable?: boolean;
   inputStyle?: TextStyle;
-
+  ref?: any;
   onChangeText: (text: string) => void;
 }

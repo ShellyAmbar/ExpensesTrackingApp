@@ -12,7 +12,8 @@ import {PopupType} from './hooks/interfaces';
 import Popup from '@ExpensesTracking/components/popup/popup';
 import PopupFilter from './popup-filter/popup-filter';
 import PopupUpdate from './popup-update/popup-update';
-const ExpensesView = () => {
+import {observer} from 'mobx-react';
+const ExpensesView = observer(() => {
   const {
     cleareFilters,
 
@@ -31,8 +32,14 @@ const ExpensesView = () => {
       {visiblePopup === PopupType.FilterExpance && (
         <Popup isVisible={visiblePopup === PopupType.FilterExpance}>
           <PopupFilter
-            onClickClean={cleareFilters}
-            onSubmit={filterExpenses}
+            onClickClean={() => {
+              cleareFilters();
+              setVisiblePopup(PopupType.Empthy);
+            }}
+            onSubmit={() => {
+              filterExpenses();
+              setVisiblePopup(PopupType.Empthy);
+            }}
             onClickClose={() => setVisiblePopup(PopupType.Empthy)}
           />
         </Popup>
@@ -53,12 +60,16 @@ const ExpensesView = () => {
       <Box style={styles.horizontalStart}>
         <TextFactory style={styles.title}>Total Expenses: </TextFactory>
         <Box style={styles.numbers}>
-          <TextFactory style={styles.amount}>{`$${
-            rootStore.user.totalExpenses.toString().split('.')[0]
-          }.`}</TextFactory>
-          <TextFactory style={styles.decimal}>{`${
-            rootStore.user.totalExpenses.toString().split('.')[1]
-          }`}</TextFactory>
+          <TextFactory style={styles.amount}>
+            {rootStore.user.totalExpenses.toString().includes('.')
+              ? `&${rootStore.user.totalExpenses.toString().split('.')[0]}.`
+              : `$${rootStore.user.totalExpenses.toString()}`}
+          </TextFactory>
+          {rootStore.user.totalExpenses.toString().includes('.') && (
+            <TextFactory style={styles.decimal}>{`${
+              rootStore.user.totalExpenses.toString().split('.')[1]
+            }`}</TextFactory>
+          )}
         </Box>
       </Box>
       <Spacer size={11} />
@@ -92,6 +103,6 @@ const ExpensesView = () => {
       />
     </Box>
   );
-};
+});
 
 export default ExpensesView;

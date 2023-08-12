@@ -6,18 +6,29 @@ import {StyleSheet} from 'react-native';
 export default StyleSheet.create({
   container: {
     width: '100%',
-    justifyContent: 'flex-start',
+
     flexDirection: 'column',
     alignItems: 'center',
+    paddingStart: 24,
+    paddingEnd: 16,
   },
+  content: {
+    width: '100%',
+
+    flexDirection: 'column',
+    paddingEnd: 24,
+  },
+  contentContainer: {
+    width: '100%',
+  },
+
   horizontalSpaces: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    width: width,
+    width: '100%',
     alignItems: 'center',
     paddingVertical: 17.5,
-    paddingEnd: 16,
-    paddingStart: 24,
+    paddingEnd: 0,
   },
   titel: {
     ...Styles.H4,
@@ -36,6 +47,6 @@ export default StyleSheet.create({
   },
   clean: {
     ...Styles.H7,
-    color: GlobalColors.TextColors.secondary,
+    color: GlobalColors.buttonColors.secondery,
   },
 });

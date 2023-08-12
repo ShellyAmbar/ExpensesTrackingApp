@@ -18,7 +18,7 @@ export default StyleSheet.create({
     position: 'absolute',
     width: width,
     top: Dimensions.get('screen').height,
-    paddingHorizontal: 32,
+    // paddingHorizontal: 32,
     borderTopLeftRadius: 22,
     borderTopRightRadius: 22,
     backgroundColor: GlobalColors.BgColors.primary,
@@ -49,14 +49,11 @@ export default StyleSheet.create({
     paddingBottom: 10,
     paddingHorizontal: 16,
     paddingVertical: 14,
-    position: 'absolute',
-    top: 0,
+
     flexDirection: 'row',
   },
   content: {
-    // marginTop: 60,
     zIndex: 3,
     width: '100%',
-    paddingTop: 8,
   },
 });
