@@ -12,4 +12,8 @@ export default StyleSheet.create({
     height: height,
     backgroundColor: GlobalColors.BgColors.primary,
   },
+  headerTitle: {
+    ...Styles.H7,
+    color: GlobalColors.TextColors.primary,
+  },
 });

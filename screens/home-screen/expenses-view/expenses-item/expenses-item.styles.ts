@@ -51,7 +51,8 @@ export default StyleSheet.create({
   },
   number: {
     flexDirection: 'row',
-    alignItems: 'center',
+
+    alignItems: 'baseline',
   },
   vertical: {
     flexDirection: 'column',

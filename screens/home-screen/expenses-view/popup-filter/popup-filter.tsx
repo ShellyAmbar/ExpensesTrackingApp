@@ -5,34 +5,53 @@ import TextFactory from '@ExpensesTracking/components/factories/text-factory/tex
 import TextInput from '@ExpensesTracking/components/controllers/text-input/text-input';
 import Spacer from '@ExpensesTracking/components/controllers/spacer/spacer';
 import ButtonFactory from '@ExpensesTracking/components/factories/button-factory/button-factory';
-
-const PopupFilter = () => {
+import {PopupFilterProps} from './interfaces';
+import Close from '@ExpensesTracking/assets/images/close.svg';
+const PopupFilter = ({
+  onSubmit,
+  onClickClose,
+  onClickClean,
+  ...props
+}: PopupFilterProps) => {
   return (
     <Box style={styles.container}>
-      <TextFactory style={styles.titel}>{'Filter Expenses'}</TextFactory>
+      <Spacer size={16} />
+      <Box style={styles.horizontalSpaces}>
+        <Box onPress={() => onClickClean()}>
+          <TextFactory style={styles.clean}>{'clean'}</TextFactory>
+        </Box>
+        <TextFactory style={styles.titel}>{'Filter Expenses'}</TextFactory>
+        <Box onPress={() => onClickClose()}>
+          <Close />
+        </Box>
+      </Box>
+
       <Spacer size={26} />
       <TextInput
-        placeholder="Title"
-        placeholderTextColor={styles.placeholder.color}
+        lableStyle={styles.lable}
+        inputStyle={styles.textInput}
+        label="Title"
         onChangeText={() => {}}
       />
-      <Spacer size={26} />
-      <Spacer size={26} />
+      <Spacer size={41} />
+
       <TextInput
-        placeholder="Amount"
-        placeholderTextColor={styles.placeholder.color}
+        lableStyle={styles.lable}
+        inputStyle={styles.textInput}
+        label="Amount"
         onChangeText={() => {}}
       />
-      <Spacer size={26} />
-      <Spacer size={26} />
+      <Spacer size={41} />
+
       <TextInput
-        placeholder="Date"
-        placeholderTextColor={styles.placeholder.color}
+        lableStyle={styles.lable}
+        inputStyle={styles.textInput}
+        label="Date"
         onChangeText={() => {}}
       />
-      <Spacer size={208 + 19 + 8} />
-      <ButtonFactory type="primary" label="Create" />
-      <Spacer size={62} />
+      <Spacer size={55} />
+      <ButtonFactory type="primary" label="Filter" onPress={() => onSubmit()} />
+      <Spacer size={32} />
     </Box>
   );
 };

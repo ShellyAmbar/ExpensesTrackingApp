@@ -3,7 +3,7 @@ import {Box} from '@ExpensesTracking/components/controllers/box/box';
 import styles from './expenses-view.styles';
 import ExpensesItem from './expenses-item/expenses-item';
 import useExpensesView from './hooks/useExpensesView';
-import {ExpenseItem} from './expenses-item/interfaces';
+import {Expense, ExpenseItem} from './expenses-item/interfaces';
 import Spacer from '@ExpensesTracking/components/controllers/spacer/spacer';
 import TextFactory from '@ExpensesTracking/components/factories/text-factory/text-factory';
 import ButtonFactory from '@ExpensesTracking/components/factories/button-factory/button-factory';
@@ -14,21 +14,27 @@ import PopupFilter from './popup-filter/popup-filter';
 import PopupUpdate from './popup-update/popup-update';
 const ExpensesView = () => {
   const {
-    expenses,
+    cleareFilters,
 
-    totalExpenses,
+    expenses,
+    rootStore,
     visiblePopup,
     setVisiblePopup,
     selectedExpanseToupdate,
     setSelectedExpanseToupdate,
+    updateExpense,
+    filterExpenses,
   } = useExpensesView();
+
   return (
     <Box style={styles.container}>
       {visiblePopup === PopupType.FilterExpance && (
-        <Popup
-          onClickClose={() => setVisiblePopup(PopupType.Empthy)}
-          isVisible={visiblePopup === PopupType.FilterExpance}>
-          <PopupFilter />
+        <Popup isVisible={visiblePopup === PopupType.FilterExpance}>
+          <PopupFilter
+            onClickClean={cleareFilters}
+            onSubmit={filterExpenses}
+            onClickClose={() => setVisiblePopup(PopupType.Empthy)}
+          />
         </Popup>
       )}
       {visiblePopup === PopupType.UpdateExpanse && (
@@ -36,8 +42,9 @@ const ExpensesView = () => {
           onClickClose={() => setVisiblePopup(PopupType.Empthy)}
           isVisible={visiblePopup === PopupType.UpdateExpanse}>
           <PopupUpdate
-            item={selectedExpanseToupdate}
-            onSubmit={() => {
+            item={selectedExpanseToupdate as Expense}
+            onSubmit={expanse => {
+              updateExpense(expanse);
               setVisiblePopup(PopupType.Empthy);
             }}
           />
@@ -46,9 +53,12 @@ const ExpensesView = () => {
       <Box style={styles.horizontalStart}>
         <TextFactory style={styles.title}>Total Expenses: </TextFactory>
         <Box style={styles.numbers}>
-          <TextFactory
-            style={styles.amount}>{`$${totalExpenses}.`}</TextFactory>
-          <TextFactory style={styles.decimal}>{`${'00'}`}</TextFactory>
+          <TextFactory style={styles.amount}>{`$${
+            rootStore.user.totalExpenses.toString().split('.')[0]
+          }.`}</TextFactory>
+          <TextFactory style={styles.decimal}>{`${
+            rootStore.user.totalExpenses.toString().split('.')[1]
+          }`}</TextFactory>
         </Box>
       </Box>
       <Spacer size={11} />

@@ -9,29 +9,42 @@ import PopupUpdateProps from './interfaces';
 const PopupUpdate = ({item, onSubmit, ...props}: PopupUpdateProps) => {
   return (
     <Box style={styles.container}>
+      <Spacer size={50} />
       <TextFactory style={styles.titel}>{'Update Expense'}</TextFactory>
       <Spacer size={26} />
       <TextInput
         placeholder="Title"
         placeholderTextColor={styles.placeholder.color}
-        onChangeText={() => {}}
+        onChangeText={titel => {
+          item.name = titel;
+        }}
       />
       <Spacer size={26} />
       <Spacer size={26} />
       <TextInput
         placeholder="Amount"
         placeholderTextColor={styles.placeholder.color}
-        onChangeText={() => {}}
+        onChangeText={amount => {
+          if (amount?.length > 0) {
+            item.amount = amount;
+          }
+        }}
       />
       <Spacer size={26} />
       <Spacer size={26} />
       <TextInput
         placeholder="Date"
         placeholderTextColor={styles.placeholder.color}
-        onChangeText={() => {}}
+        onChangeText={date => {
+          item.date = date;
+        }}
       />
       <Spacer size={208 + 19 + 8} />
-      <ButtonFactory type="primary" label="Create" />
+      <ButtonFactory
+        type="primary"
+        label="Create"
+        onPress={() => onSubmit(item)}
+      />
       <Spacer size={62} />
     </Box>
   );

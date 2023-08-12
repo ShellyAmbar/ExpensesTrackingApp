@@ -8,7 +8,6 @@ export default StyleSheet.create({
   textInput: {
     borderBottomWidth: 1,
     width: '100%',
-
     backgroundColor: GlobalColors.BgColors.primary,
     borderColor: GlobalColors.Border.light,
   },

@@ -5,8 +5,9 @@ enum Currency {
 type Expense = {
   id: number;
   name: string;
-  amount: number;
+  amount: string;
   currency: Currency;
+  date: string;
 };
 type ExpenseItem = {
   id: number;

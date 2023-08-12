@@ -1,36 +1,19 @@
 import {useEffect, useState} from 'react';
 import {Currency, Expense, ExpenseItem} from '../expenses-item/interfaces';
 import {PopupType, UseExpensesViewProps} from './interfaces';
+import {useStore} from '@ExpensesTracking/store';
 
-const list: ExpenseItem[] = [
-  {
-    id: 0,
-    date: '2/2/2022',
-    expenses: [
-      {id: 0, name: '1', amount: 20, currency: Currency.Dolar},
-      {id: 1, name: '2', amount: 20, currency: Currency.Dolar},
-    ],
-  },
-  {
-    id: 1,
-    date: '2/3/2022',
-    expenses: [
-      {id: 0, name: '1', amount: 20, currency: Currency.Dolar},
-      {id: 1, name: '2', amount: 20, currency: Currency.Dolar},
-    ],
-  },
-];
 const useExpensesView = (props?: UseExpensesViewProps) => {
-  const [expenses, setExpenses] = useState<ExpenseItem[]>(list);
-  const [totalExpenses, setTotalExpenses] = useState(0);
+  const rootStore = useStore();
   const [visiblePopup, setVisiblePopup] = useState(PopupType.Empthy);
   const [selectedExpanseToupdate, setSelectedExpanseToupdate] =
     useState<Expense>();
+  const [expenses, setExpenses] = useState(rootStore.user.expenses);
 
   const getTotalExpenses = () => {
     let totalExpenses = 0;
-    for (let i = 0; i < expenses.length; i++) {
-      const sum = expenses[i].expenses.reduce((acc, obj) => {
+    for (let i = 0; i < rootStore.user.expenses?.length; i++) {
+      const sum = rootStore.user.expenses[i].expenses?.reduce((acc, obj) => {
         return acc + obj.amount;
       }, 0);
 
@@ -40,19 +23,62 @@ const useExpensesView = (props?: UseExpensesViewProps) => {
     return totalExpenses;
   };
 
+  const updateExpense = (expenseToUpdate: Expense) => {
+    const expensesItemWithExpense = rootStore.user.expenses?.filter(
+      expensesItem => expensesItem.date === expenseToUpdate.date,
+    );
+    const expenseIndexInList = expensesItemWithExpense[0].expenses?.findIndex(
+      expense => expense.id === expenseToUpdate.id,
+    );
+    expensesItemWithExpense[0].expenses[expenseIndexInList] = expenseToUpdate;
+  };
+
+  const filterExpenses = () => {
+    const filters = rootStore.user.filters;
+    let filteredList = rootStore.user.expenses;
+    if (filters.date) {
+      filteredList = filteredList?.filter(
+        expensesItem => expensesItem.date === filters.date,
+      );
+    }
+    if (filters.titel) {
+      filteredList = filteredList?.filter(expensesItem => {
+        return (
+          expensesItem?.expenses?.filter(item => item.name === filters.titel)
+            .length > 0
+        );
+      });
+    }
+    if (filters.amount) {
+      filteredList = filteredList?.filter(expensesItem => {
+        return (
+          expensesItem?.expenses?.filter(item => item.amount === filters.amount)
+            .length > 0
+        );
+      });
+    }
+    setExpenses(filteredList);
+  };
+
+  const cleareFilters = () => {
+    setExpenses(rootStore.user.expenses);
+  };
+
   useEffect(() => {
     const total = getTotalExpenses();
-    setTotalExpenses(total);
-  }, [expenses.length.toString()]);
+    rootStore.user.setTotalExpenses(total);
+  }, []);
 
   return {
-    expenses,
-
-    totalExpenses,
+    rootStore,
     visiblePopup,
     setVisiblePopup,
     selectedExpanseToupdate,
     setSelectedExpanseToupdate,
+    updateExpense,
+    cleareFilters,
+    expenses,
+    filterExpenses,
   };
 };
 

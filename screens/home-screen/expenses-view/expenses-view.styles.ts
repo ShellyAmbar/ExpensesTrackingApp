@@ -7,6 +7,7 @@ export default StyleSheet.create({
   container: {
     width: '100%',
     height: '100%',
+    backgroundColor: GlobalColors.BgColors.white,
   },
   contentContainer: {
     width: '100%',
@@ -27,6 +28,8 @@ export default StyleSheet.create({
     flexDirection: 'row',
     marginTop: 5,
     marginStart: 9,
+    justifyContent: 'center',
+    alignItems: 'baseline',
   },
   amount: {
     ...Styles.H6,

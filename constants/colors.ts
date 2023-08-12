@@ -9,6 +9,8 @@ export const GlobalColors = {
     secondery: '#rgba(0,0,0,0.8)',
     secion: '#F4EEEE',
     backdrop: '#rgba(0,0,0,0.5)',
+    white: '#FFFFFF',
+    black: '#000',
   },
   buttonColors: {
     primary: '#5B58AD',

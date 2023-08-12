@@ -7,6 +7,7 @@ import styles from './main-bottom-nav.styles';
 import useMainBottomNav from './hooks/useMainBottomNav';
 import Popup from '@ExpensesTracking/components/popup/popup';
 import PopupCreateNewExpense from './popup-create-new-expense/popup-create-new-expense';
+import {rootStore} from '@ExpensesTracking/store';
 
 const Tab = createBottomTabNavigator();
 
@@ -19,7 +20,9 @@ const MainBottomNav = () => {
         <Popup
           onClickClose={() => setIsShowPopupCreateExpense(false)}
           isVisible={isShowPopupCreateExpense}>
-          <PopupCreateNewExpense />
+          <PopupCreateNewExpense
+            onClose={() => setIsShowPopupCreateExpense(false)}
+          />
         </Popup>
       )}
       <Tab.Navigator
@@ -33,7 +36,12 @@ const MainBottomNav = () => {
           tabBarInactiveTintColor: styles.tabBarInactiveTintColor.color,
         }}>
         <Tab.Screen
-          options={{headerShown: false, tabBarIcon: () => null}}
+          options={{
+            headerShown: true,
+            tabBarIcon: () => null,
+
+            tabBarLabel: 'Home',
+          }}
           name="Home">
           {HomeScreen}
         </Tab.Screen>
@@ -62,6 +70,7 @@ const MainBottomNav = () => {
           options={{
             headerShown: false,
             tabBarIcon: () => null,
+            tabBarLabel: 'Profile',
           }}
           name="Profile">
           {ProfileScreen}

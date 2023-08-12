@@ -42,28 +42,30 @@ const Popup = ({
           },
         ]}>
         <Box style={Styles.container}>
-          <Box style={Styles.top}>
-            <Box style={Styles.end} />
+          {(onClickClose || title) && (
+            <Box style={Styles.top}>
+              <Box style={Styles.end} />
 
-            {title ? (
-              <TextFactory style={{...titleStyle, ...Styles.title}}>
-                {title}
-              </TextFactory>
-            ) : (
-              <Box style={Styles.title} />
-            )}
-            {onClickClose ? (
-              <Box
-                onPress={() => {
-                  animatSlideDown();
-                }}
-                style={Styles.closeButton}>
-                <Close />
-              </Box>
-            ) : (
-              <Box style={Styles.closeButton} />
-            )}
-          </Box>
+              {title ? (
+                <TextFactory style={{...titleStyle, ...Styles.title}}>
+                  {title}
+                </TextFactory>
+              ) : (
+                <Box style={Styles.title} />
+              )}
+              {onClickClose ? (
+                <Box
+                  onPress={() => {
+                    animatSlideDown();
+                  }}
+                  style={Styles.closeButton}>
+                  <Close />
+                </Box>
+              ) : (
+                <Box style={Styles.closeButton} />
+              )}
+            </Box>
+          )}
 
           <Box style={Styles.content}>{children}</Box>
         </Box>

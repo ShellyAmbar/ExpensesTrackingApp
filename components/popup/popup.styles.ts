@@ -54,7 +54,7 @@ export default StyleSheet.create({
     flexDirection: 'row',
   },
   content: {
-    marginTop: 60,
+    // marginTop: 60,
     zIndex: 3,
     width: '100%',
     paddingTop: 8,

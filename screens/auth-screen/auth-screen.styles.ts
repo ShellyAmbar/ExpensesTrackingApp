@@ -33,18 +33,18 @@ export default StyleSheet.create({
     width: '100%',
     borderWidth: 1,
     borderColor: GlobalColors.Border.primary,
-    shadowColor: GlobalColors.Border.primary,
+    shadowColor: GlobalColors.BgColors.black,
+    shadowOpacity: 0.25,
     shadowOffset: {
       width: 0,
       height: 4,
     },
-    shadowOpacity: 0.25,
-    shadowRadius: 0,
-
+    shadowRadius: 4,
     elevation: 4,
     paddingBottom: 9,
     paddingTop: 28,
     paddingHorizontal: 10,
+    backgroundColor: GlobalColors.BgColors.white,
   },
   textInputPlaceHolder: {
     color: GlobalColors.TextColors.lightGray,

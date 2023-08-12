@@ -8,12 +8,6 @@ import {
 import ButtonProps from '../button/interfaces';
 
 export type boxProps =
-  //  ViewProps & {ref?: any} & {
-  //   onPress?: () => void;
-  //   ref?: any;
-  //   withoutFeedback?: boolean;
-  // } & TouchableOpacityProps &
-  //   ButtonProps & {scroll?: boolean} & ScrollViewProps;
   | ViewProps
   | ({
       onPress: () => void;
