@@ -41,8 +41,6 @@ export default StyleSheet.create({
     },
     shadowRadius: 4,
     elevation: 4,
-    paddingBottom: 9,
-    paddingTop: 28,
     paddingHorizontal: 10,
     backgroundColor: GlobalColors.BgColors.white,
   },
