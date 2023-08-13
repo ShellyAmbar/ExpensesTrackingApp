@@ -9,8 +9,7 @@ export default StyleSheet.create({
 
     flexDirection: 'column',
     alignItems: 'center',
-    paddingStart: 24,
-    paddingEnd: 16,
+    paddingHorizontal: 32,
   },
 
   horizontalSpaces: {
