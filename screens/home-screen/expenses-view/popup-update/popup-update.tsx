@@ -36,7 +36,7 @@ const PopupUpdate = ({item, onSubmit, ...props}: PopupUpdateProps) => {
         </Popup>
       )}
 
-      <Spacer size={50} />
+      <Spacer size={8} />
       <TextFactory style={styles.titel}>{'Edit Expense'}</TextFactory>
 
       <TextInput

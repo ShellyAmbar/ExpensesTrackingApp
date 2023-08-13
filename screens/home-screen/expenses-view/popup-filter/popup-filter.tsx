@@ -8,13 +8,7 @@ import ButtonFactory from '@ExpensesTracking/components/factories/button-factory
 import {PopupFilterProps} from './interfaces';
 import Close from '@ExpensesTracking/assets/images/close.svg';
 import {useStore} from '@ExpensesTracking/store';
-import {
-  Keyboard,
-  KeyboardAvoidingView,
-  Platform,
-  ScrollView,
-  TouchableWithoutFeedback,
-} from 'react-native';
+import {Keyboard} from 'react-native';
 import Popup from '@ExpensesTracking/components/popup/popup';
 import DatePickerView from '@ExpensesTracking/components/date-picker-view/date-picker-view';
 import moment from 'moment';
@@ -64,47 +58,46 @@ const PopupFilter = ({
       </Box>
 
       <Spacer size={9} />
-      <KeyboardAvoidingView style={{width: '100%'}}>
-        <Box style={styles.content}>
-          <TextInput
-            lableStyle={styles.lable}
-            inputStyle={styles.textInput}
-            label="Title"
-            defaultValue={store.user.filters.titel ?? ''}
-            onChangeText={text => {
-              store.user.filters.titel = text;
-            }}
-          />
-          <Spacer size={41} />
 
-          <TextInput
-            lableStyle={styles.lable}
-            inputStyle={styles.textInput}
-            label="Amount"
-            defaultValue={store.user.filters.amount ?? ''}
-            onChangeText={text => {
-              store.user.filters.amount = text;
-            }}
-          />
-          <Spacer size={41} />
+      <Box style={styles.content}>
+        <TextInput
+          lableStyle={styles.lable}
+          inputStyle={styles.textInput}
+          label="Title"
+          defaultValue={store.user.filters.titel ?? ''}
+          onChangeText={text => {
+            store.user.filters.titel = text;
+          }}
+        />
+        <Spacer size={41} />
 
-          <TextInput
-            lableStyle={styles.lable}
-            inputStyle={styles.textInput}
-            label="Date"
-            defaultValue={
-              store.user.filters.date
-                ? moment(store.user.filters.date).format('DD/MM/YYYY')
-                : ''
-            }
-            onChangeText={text => {}}
-            onPressIn={() => {
-              setOpenDatePicker(true);
-            }}
-          />
-          <Spacer size={55} />
-        </Box>
-      </KeyboardAvoidingView>
+        <TextInput
+          lableStyle={styles.lable}
+          inputStyle={styles.textInput}
+          label="Amount"
+          defaultValue={store.user.filters.amount ?? ''}
+          onChangeText={text => {
+            store.user.filters.amount = text;
+          }}
+        />
+        <Spacer size={41} />
+
+        <TextInput
+          lableStyle={styles.lable}
+          inputStyle={styles.textInput}
+          label="Date"
+          defaultValue={
+            store.user.filters.date
+              ? moment(store.user.filters.date).format('DD/MM/YYYY')
+              : ''
+          }
+          onChangeText={text => {}}
+          onPressIn={() => {
+            setOpenDatePicker(true);
+          }}
+        />
+        <Spacer size={55} />
+      </Box>
 
       <ButtonFactory type="primary" label="Filter" onPress={() => onSubmit()} />
       <Spacer size={32} />
