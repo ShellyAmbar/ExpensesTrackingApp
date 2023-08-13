@@ -10,8 +10,14 @@ import moment from 'moment';
 import Popup from '@ExpensesTracking/components/popup/popup';
 import usePopupUpdate from './hooks/usePopupUpdate';
 import DatePickerView from '@ExpensesTracking/components/date-picker-view/date-picker-view';
+import {Keyboard} from 'react-native';
 const PopupUpdate = ({item, onSubmit, ...props}: PopupUpdateProps) => {
-  const {openDatePicker, setOpenDatePicker} = usePopupUpdate();
+  const {
+    openDatePicker,
+    setOpenDatePicker,
+    currentUpdatedExpense,
+    setcurrentUpdatedExpense,
+  } = usePopupUpdate({expense: item});
   return (
     <Box style={styles.container}>
       {openDatePicker && (
@@ -22,8 +28,9 @@ const PopupUpdate = ({item, onSubmit, ...props}: PopupUpdateProps) => {
           isVisible={openDatePicker}>
           <DatePickerView
             onConfirm={date => {
-              item.date = date;
+              setcurrentUpdatedExpense({...currentUpdatedExpense, date});
               setOpenDatePicker(false);
+              Keyboard.dismiss();
             }}
           />
         </Popup>
@@ -38,7 +45,7 @@ const PopupUpdate = ({item, onSubmit, ...props}: PopupUpdateProps) => {
         inputStyle={styles.textInput}
         defaultValue={item.name ?? ''}
         onChangeText={titel => {
-          item.name = titel;
+          setcurrentUpdatedExpense({...currentUpdatedExpense, name: titel});
         }}
       />
       <Spacer size={27} />
@@ -50,7 +57,7 @@ const PopupUpdate = ({item, onSubmit, ...props}: PopupUpdateProps) => {
         defaultValue={item.amount ?? ''}
         onChangeText={amount => {
           if (amount?.length > 0) {
-            item.amount = amount;
+            setcurrentUpdatedExpense({...currentUpdatedExpense, amount});
           }
         }}
       />
@@ -60,7 +67,11 @@ const PopupUpdate = ({item, onSubmit, ...props}: PopupUpdateProps) => {
         label="Date"
         lableStyle={styles.lable}
         inputStyle={styles.textInput}
-        defaultValue={item.date ? moment(item.date).format('DD/MM/YYYY') : ''}
+        defaultValue={
+          item.date
+            ? moment(currentUpdatedExpense.date).format('DD/MM/YYYY')
+            : ''
+        }
         onChangeText={() => {}}
         onPressIn={() => {
           setOpenDatePicker(true);
@@ -70,7 +81,7 @@ const PopupUpdate = ({item, onSubmit, ...props}: PopupUpdateProps) => {
       <ButtonFactory
         type="primary"
         label="Save"
-        onPress={() => onSubmit(item)}
+        onPress={() => onSubmit(currentUpdatedExpense)}
       />
       <Spacer size={62} />
     </Box>

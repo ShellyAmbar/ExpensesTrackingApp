@@ -24,19 +24,74 @@ const useExpensesView = (props?: UseExpensesViewProps) => {
     return totalExpenses;
   };
 
+  const createExpense = (newExpense: Expense) => {
+    if (
+      newExpense.amount?.length > 0 &&
+      newExpense.date?.toString().length > 0 &&
+      newExpense.name?.length > 0
+    ) {
+      const isDateIncludedInList =
+        rootStore.user.expenses?.filter(
+          item =>
+            moment(item.date).format('DD/MM/YYYY') ===
+            moment(newExpense.date).format('DD/MM/YYYY'),
+        ).length > 0;
+      if (!isDateIncludedInList) {
+        newExpense.id = 0;
+        const expenseItem: ExpenseItem = {
+          id: rootStore.user.expenses?.length,
+          date: newExpense.date,
+          expenses: [newExpense as Expense],
+        };
+        rootStore.user.expenses.push(expenseItem);
+      } else {
+        const expensesItemIndex = rootStore.user.expenses?.findIndex(
+          item =>
+            moment(item.date).format('DD/MM/YYYY') ===
+            moment(newExpense.date).format('DD/MM/YYYY'),
+        );
+        newExpense.id =
+          rootStore.user.expenses[expensesItemIndex].expenses?.length;
+        rootStore.user.expenses[expensesItemIndex].expenses.push(
+          newExpense as Expense,
+        );
+      }
+    }
+  };
+
+  const deleteExpenseItem = () => {
+    const expensesItemWithExpense = rootStore.user.expenses?.filter(
+      expensesItem => expensesItem.date === selectedExpanseToupdate?.date,
+    );
+
+    if (expensesItemWithExpense?.length > 0) {
+      if (expensesItemWithExpense[0].expenses?.length === 1) {
+        //delete all the expenses item
+        rootStore.user.expenses = rootStore.user.expenses?.filter(
+          expensesItem => expensesItem.date !== selectedExpanseToupdate?.date,
+        );
+      } else {
+        //delete only one expense in the expenses item
+        expensesItemWithExpense[0].expenses =
+          expensesItemWithExpense[0].expenses?.filter(
+            expense => expense.id !== selectedExpanseToupdate?.id,
+          );
+      }
+    }
+  };
+
   const updateExpense = (expenseToUpdate: Expense) => {
     const expensesItemWithExpense = rootStore.user.expenses?.filter(
       expensesItem => expensesItem.date === expenseToUpdate.date,
     );
 
     if (expensesItemWithExpense.length === 0) {
+      //delete old expense -
+
+      deleteExpenseItem();
+
       //creating new expenses item with the new date
-      const newExpansesItem: ExpenseItem = {
-        id: rootStore.user.expenses?.length,
-        date: expenseToUpdate.date,
-        expenses: [expenseToUpdate],
-      };
-      rootStore.user.expenses.push(newExpansesItem);
+      createExpense(expenseToUpdate);
     } else {
       //update exist item
       const expenseIndexInList = expensesItemWithExpense[0].expenses?.findIndex(

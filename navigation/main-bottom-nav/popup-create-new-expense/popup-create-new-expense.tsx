@@ -15,6 +15,7 @@ import {width} from '@ExpensesTracking/constants/styles';
 import {GlobalColors} from '@ExpensesTracking/constants/colors';
 import moment from 'moment';
 import DatePickerView from '@ExpensesTracking/components/date-picker-view/date-picker-view';
+import {Keyboard} from 'react-native';
 
 const PopupCreateNewExpense = ({
   onClose,
@@ -41,6 +42,7 @@ const PopupCreateNewExpense = ({
               (newExpense as Expense).date = date;
               setNewExpense({...(newExpense as Expense)});
               setOpenDatePicker(false);
+              Keyboard.dismiss();
             }}
           />
         </Popup>

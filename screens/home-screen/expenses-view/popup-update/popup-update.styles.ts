@@ -9,6 +9,7 @@ export default StyleSheet.create({
     justifyContent: 'flex-start',
     flexDirection: 'column',
     alignItems: 'center',
+    paddingHorizontal: 32,
   },
   titel: {
     ...Styles.H4,

@@ -1,11 +1,16 @@
-import {useLayoutEffect} from 'react';
+import {useEffect, useLayoutEffect} from 'react';
+import {BackHandler} from 'react-native';
 
 const useAuthScreen = ({navigation}) => {
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      headerShown: false,
-    });
+  const backAction = () => {
+    return true;
+  };
+  useEffect(() => {
+    BackHandler.addEventListener('hardwareBackPress', backAction);
+    return () =>
+      BackHandler.removeEventListener('hardwareBackPress', backAction);
   }, []);
+
   return {};
 };
 
