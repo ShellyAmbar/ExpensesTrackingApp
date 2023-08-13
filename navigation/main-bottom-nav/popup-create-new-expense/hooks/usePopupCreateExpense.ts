@@ -36,7 +36,8 @@ const usePopupCreateExpense = () => {
             moment(item.date).format('DD/MM/YYYY') ===
             moment(newExpense.date).format('DD/MM/YYYY'),
         );
-        newExpense.id = root.user.expenses[expensesItemIndex].expenses?.length;
+        newExpense.id =
+          root.user.expenses[expensesItemIndex].expenses?.length + 1;
         root.user.expenses[expensesItemIndex].expenses.push(
           newExpense as Expense,
         );

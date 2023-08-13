@@ -67,6 +67,8 @@ const useExpensesView = (props?: UseExpensesViewProps) => {
     if (expensesItemWithExpense?.length > 0) {
       if (expensesItemWithExpense[0].expenses?.length === 1) {
         //delete all the expenses item
+        console.log('delete all the expenses item');
+
         rootStore.user.expenses = rootStore.user.expenses?.filter(
           expensesItem => expensesItem.date !== selectedExpanseToupdate?.date,
         );
