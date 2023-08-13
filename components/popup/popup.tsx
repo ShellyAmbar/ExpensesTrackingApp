@@ -28,8 +28,6 @@ const Popup = ({
     <Modal
       visible={isVisible}
       onRequestClose={() => {
-        console.log('close');
-
         animatSlideDown();
       }}
       transparent={true}>

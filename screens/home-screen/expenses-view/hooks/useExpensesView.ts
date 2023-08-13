@@ -67,7 +67,6 @@ const useExpensesView = (props?: UseExpensesViewProps) => {
     if (expensesItemWithExpense?.length > 0) {
       if (expensesItemWithExpense[0].expenses?.length === 1) {
         //delete all the expenses item
-        console.log('delete all the expenses item');
 
         rootStore.user.expenses = rootStore.user.expenses?.filter(
           expensesItem => expensesItem.date !== selectedExpanseToupdate?.date,
@@ -107,11 +106,9 @@ const useExpensesView = (props?: UseExpensesViewProps) => {
   const filterExpenses = () => {
     const filters = rootStore.user.filters;
     let filteredList = rootStore.user.expenses;
-    console.log(filters);
 
     if (filters.date) {
       filteredList = filteredList?.filter(expensesItem => {
-        console.log(expensesItem.date, filters.date);
         return (
           moment(expensesItem.date).format('DD/MM/YYYY') ===
           moment(filters.date).format('DD/MM/YYYY')

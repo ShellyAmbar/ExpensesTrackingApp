@@ -16,7 +16,6 @@ const usePopupFilter = (props?: UsePopupFilterProps) => {
   }, []);
 
   const updateFilters = (type: EnumFilters, value: FilterValue) => {
-    console.log(type, value);
     switch (type) {
       case EnumFilters.Amount:
         selectedFilters.amount = value as string;
@@ -27,8 +26,6 @@ const usePopupFilter = (props?: UsePopupFilterProps) => {
         setSelectedFilters({...selectedFilters});
         break;
       case EnumFilters.Title:
-        console.log('title change');
-
         selectedFilters.title = value as string;
         setSelectedFilters({...selectedFilters});
         break;
