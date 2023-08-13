@@ -1,18 +1,23 @@
 import {useState} from 'react';
-import {FilterValue, Filters, UsePopupFilterProps} from './interfaces';
-import {useStore} from '@ExpensesTracking/store';
+import {
+  FilterValue,
+  EnumFilters,
+  Filters,
+  UsePopupFilterProps,
+} from './interfaces';
 
 const usePopupFilter = (props?: UsePopupFilterProps) => {
-  const store = useStore();
   const [openDatePicker, setOpenDatePicker] = useState(false);
-  const updateFilters = (type: Filters, value: FilterValue) => {
+  const [selectedFilters, setSelectedFilters] = useState<Filters>({});
+  const updateFilters = (type: EnumFilters, value: FilterValue) => {
     switch (type) {
-      case Filters.Amount:
-        store.user.filters.amount = value as string;
-      case Filters.Date:
-        store.user.filters.date = value as Date;
-      case Filters.Title:
-        store.user.filters.titel = value as string;
+      case EnumFilters.Amount:
+        setSelectedFilters({...selectedFilters, amount: value as string});
+
+      case EnumFilters.Date:
+        setSelectedFilters({...selectedFilters, date: value as Date});
+      case EnumFilters.Title:
+        setSelectedFilters({...selectedFilters, title: value as string});
     }
   };
 
@@ -20,6 +25,8 @@ const usePopupFilter = (props?: UsePopupFilterProps) => {
     updateFilters,
     setOpenDatePicker,
     openDatePicker,
+    selectedFilters,
+    setSelectedFilters,
   };
 };
 

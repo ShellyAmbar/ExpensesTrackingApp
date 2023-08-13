@@ -7,12 +7,13 @@ import Spacer from '@ExpensesTracking/components/controllers/spacer/spacer';
 import ButtonFactory from '@ExpensesTracking/components/factories/button-factory/button-factory';
 import {PopupFilterProps} from './interfaces';
 import Close from '@ExpensesTracking/assets/images/close.svg';
-import {useStore} from '@ExpensesTracking/store';
+import {rootStore, useStore} from '@ExpensesTracking/store';
 import {Keyboard} from 'react-native';
 import Popup from '@ExpensesTracking/components/popup/popup';
 import DatePickerView from '@ExpensesTracking/components/date-picker-view/date-picker-view';
 import moment from 'moment';
 import usePopupFilter from './hooks/usePopupFilter';
+import {EnumFilters} from './hooks/interfaces';
 const PopupFilter = ({
   onSubmit,
   onClickClose,
@@ -20,7 +21,8 @@ const PopupFilter = ({
   ...props
 }: PopupFilterProps) => {
   const store = useStore();
-  const {openDatePicker, setOpenDatePicker} = usePopupFilter();
+  const {openDatePicker, setOpenDatePicker, selectedFilters, updateFilters} =
+    usePopupFilter();
   return (
     <Box
       scroll
@@ -34,7 +36,7 @@ const PopupFilter = ({
           isVisible={openDatePicker}>
           <DatePickerView
             onConfirm={date => {
-              store.user.filters.date = date;
+              updateFilters(EnumFilters.Date, date);
               setOpenDatePicker(false);
               Keyboard.dismiss();
             }}
@@ -50,7 +52,6 @@ const PopupFilter = ({
         <TextFactory style={styles.titel}>{'Filter'}</TextFactory>
         <Box
           onPress={() => {
-            store.user.filters = {};
             onClickClose();
           }}>
           <Close />
@@ -66,7 +67,7 @@ const PopupFilter = ({
           label="Title"
           defaultValue={store.user.filters.titel ?? ''}
           onChangeText={text => {
-            store.user.filters.titel = text;
+            updateFilters(EnumFilters.Title, text);
           }}
         />
         <Spacer size={41} />
@@ -77,7 +78,7 @@ const PopupFilter = ({
           label="Amount"
           defaultValue={store.user.filters.amount ?? ''}
           onChangeText={text => {
-            store.user.filters.amount = text;
+            updateFilters(EnumFilters.Amount, text);
           }}
         />
         <Spacer size={41} />
@@ -99,7 +100,14 @@ const PopupFilter = ({
         <Spacer size={55} />
       </Box>
 
-      <ButtonFactory type="primary" label="Filter" onPress={() => onSubmit()} />
+      <ButtonFactory
+        type="primary"
+        label="Filter"
+        onPress={() => {
+          rootStore.user.filters = selectedFilters;
+          onSubmit();
+        }}
+      />
       <Spacer size={32} />
     </Box>
   );

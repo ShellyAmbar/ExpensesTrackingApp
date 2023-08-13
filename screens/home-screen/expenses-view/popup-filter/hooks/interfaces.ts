@@ -1,4 +1,4 @@
-enum Filters {
+enum EnumFilters {
   Title,
   Amount,
   Date,
@@ -6,5 +6,10 @@ enum Filters {
 
 type UsePopupFilterProps = {};
 type FilterValue = string | number | Date;
+type Filters = {
+  date?: Date;
+  title?: string;
+  amount?: string;
+};
 
-export {Filters, UsePopupFilterProps, FilterValue};
+export {EnumFilters, UsePopupFilterProps, FilterValue, Filters};

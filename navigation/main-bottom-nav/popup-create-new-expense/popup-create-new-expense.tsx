@@ -5,14 +5,10 @@ import TextFactory from '@ExpensesTracking/components/factories/text-factory/tex
 import TextInput from '@ExpensesTracking/components/controllers/text-input/text-input';
 import Spacer from '@ExpensesTracking/components/controllers/spacer/spacer';
 import ButtonFactory from '@ExpensesTracking/components/factories/button-factory/button-factory';
-import {Expense, ExpenseItem} from '@ExpensesTracking/store/data/expanses';
-import {useStore} from '@ExpensesTracking/store';
+import {Expense} from '@ExpensesTracking/store/data/expanses';
 import usePopupCreateExpense from './hooks/usePopupCreateExpense';
 import {PopupCreateNewExpenseProps} from './interfaces';
-import DatePicker from 'react-native-date-picker';
 import Popup from '@ExpensesTracking/components/popup/popup';
-import {width} from '@ExpensesTracking/constants/styles';
-import {GlobalColors} from '@ExpensesTracking/constants/colors';
 import moment from 'moment';
 import DatePickerView from '@ExpensesTracking/components/date-picker-view/date-picker-view';
 import {Keyboard} from 'react-native';
