@@ -39,6 +39,8 @@ export default StyleSheet.create({
       width: 0,
       height: 4,
     },
+
+    paddingTop: 28,
     shadowRadius: 4,
     elevation: 4,
     paddingHorizontal: 10,

@@ -10,9 +10,8 @@ export default StyleSheet.create({
     width: '100%',
     backgroundColor: GlobalColors.BgColors.primary,
     borderColor: GlobalColors.Border.light,
-    height: 18 + 16,
     justifyContent: 'center',
-    paddingVertical: 8,
+    paddingBottom: 8,
   },
 
   title: {

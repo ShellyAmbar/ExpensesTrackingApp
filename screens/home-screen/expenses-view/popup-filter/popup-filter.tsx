@@ -20,9 +20,13 @@ const PopupFilter = ({
   onClickClean,
   ...props
 }: PopupFilterProps) => {
-  const store = useStore();
-  const {openDatePicker, setOpenDatePicker, selectedFilters, updateFilters} =
-    usePopupFilter();
+  const {
+    openDatePicker,
+    setOpenDatePicker,
+    selectedFilters,
+    updateFilters,
+    cleanSelectedFilters,
+  } = usePopupFilter();
   return (
     <Box
       scroll
@@ -46,7 +50,11 @@ const PopupFilter = ({
 
       <Spacer size={16} />
       <Box style={styles.horizontalSpaces}>
-        <Box onPress={() => onClickClean()}>
+        <Box
+          onPress={() => {
+            cleanSelectedFilters();
+            onClickClean();
+          }}>
           <TextFactory style={styles.clean}>{'clean'}</TextFactory>
         </Box>
         <TextFactory style={styles.titel}>{'Filter'}</TextFactory>
@@ -65,7 +73,7 @@ const PopupFilter = ({
           lableStyle={styles.lable}
           inputStyle={styles.textInput}
           label="Title"
-          defaultValue={store.user.filters.titel ?? ''}
+          defaultValue={selectedFilters.title ?? ''}
           onChangeText={text => {
             updateFilters(EnumFilters.Title, text);
           }}
@@ -76,7 +84,7 @@ const PopupFilter = ({
           lableStyle={styles.lable}
           inputStyle={styles.textInput}
           label="Amount"
-          defaultValue={store.user.filters.amount ?? ''}
+          defaultValue={selectedFilters.amount ?? ''}
           onChangeText={text => {
             updateFilters(EnumFilters.Amount, text);
           }}
@@ -88,8 +96,8 @@ const PopupFilter = ({
           inputStyle={styles.textInput}
           label="Date"
           defaultValue={
-            store.user.filters.date
-              ? moment(store.user.filters.date).format('DD/MM/YYYY')
+            selectedFilters.date
+              ? moment(selectedFilters.date).format('DD/MM/YYYY')
               : ''
           }
           onChangeText={text => {}}

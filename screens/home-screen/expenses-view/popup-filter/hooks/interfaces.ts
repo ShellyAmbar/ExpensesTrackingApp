@@ -1,7 +1,7 @@
 enum EnumFilters {
-  Title,
-  Amount,
-  Date,
+  Title = 0,
+  Amount = 1,
+  Date = 2,
 }
 
 type UsePopupFilterProps = {};
