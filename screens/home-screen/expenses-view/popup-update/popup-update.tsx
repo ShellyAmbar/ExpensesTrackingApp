@@ -11,6 +11,7 @@ import Popup from '@ExpensesTracking/components/popup/popup';
 import usePopupUpdate from './hooks/usePopupUpdate';
 import DatePickerView from '@ExpensesTracking/components/date-picker-view/date-picker-view';
 import {Keyboard} from 'react-native';
+import FormView from '@ExpensesTracking/components/form-view/form-view';
 const PopupUpdate = ({item, onSubmit, ...props}: PopupUpdateProps) => {
   const {
     openDatePicker,
@@ -37,52 +38,57 @@ const PopupUpdate = ({item, onSubmit, ...props}: PopupUpdateProps) => {
       )}
 
       <Spacer size={8} />
-      <TextFactory style={styles.titel}>{'Edit Expense'}</TextFactory>
 
-      <TextInput
-        label="Title"
-        lableStyle={styles.lable}
-        inputStyle={styles.textInput}
-        defaultValue={item.name ?? ''}
-        onChangeText={titel => {
-          setcurrentUpdatedExpense({...currentUpdatedExpense, name: titel});
-        }}
-      />
-      <Spacer size={27} />
+      <FormView
+        title="Edit Expense"
+        onClickConfirm={() => onSubmit(currentUpdatedExpense)}
+        properties={[
+          {
+            name: 'Title',
+            label: 'Title',
+            labelStyle: styles.lable,
+            inputStyle: styles.textInput,
+            placeholderTextColor: styles.placeholder.color,
+            onChangeText: text => {
+              setcurrentUpdatedExpense({...currentUpdatedExpense, name: text});
+            },
+            value: currentUpdatedExpense.name ?? '',
+          },
+          {
+            label: 'Amount',
+            labelStyle: styles.lable,
+            name: 'Amount',
+            inputStyle: styles.textInput,
+            placeholderTextColor: styles.placeholder.color,
+            onChangeText: text => {
+              if (text?.length > 0) {
+                setcurrentUpdatedExpense({
+                  ...currentUpdatedExpense,
+                  amount: text,
+                });
+              }
+            },
+            value: currentUpdatedExpense.amount ?? '',
+          },
+          {
+            name: 'Date',
+            label: 'Date',
+            labelStyle: styles.lable,
+            inputStyle: styles.textInput,
+            value: currentUpdatedExpense.date
+              ? moment(currentUpdatedExpense.date).format('DD/MM/YYYY')
+              : '',
 
-      <TextInput
-        label="Amount"
-        lableStyle={styles.lable}
-        inputStyle={styles.textInput}
-        defaultValue={item.amount ?? ''}
-        onChangeText={amount => {
-          if (amount?.length > 0) {
-            setcurrentUpdatedExpense({...currentUpdatedExpense, amount});
-          }
-        }}
+            onChangeText: () => {},
+            onPressIn: () => {
+              setOpenDatePicker(true);
+            },
+          },
+        ]}
+        children={<Spacer size={235} />}
+        spacerBetweenProperties={27}
       />
-      <Spacer size={27} />
 
-      <TextInput
-        label="Date"
-        lableStyle={styles.lable}
-        inputStyle={styles.textInput}
-        defaultValue={
-          item.date
-            ? moment(currentUpdatedExpense.date).format('DD/MM/YYYY')
-            : ''
-        }
-        onChangeText={() => {}}
-        onPressIn={() => {
-          setOpenDatePicker(true);
-        }}
-      />
-      <Spacer size={235} />
-      <ButtonFactory
-        type="primary"
-        label="Save"
-        onPress={() => onSubmit(currentUpdatedExpense)}
-      />
       <Spacer size={62} />
     </Box>
   );

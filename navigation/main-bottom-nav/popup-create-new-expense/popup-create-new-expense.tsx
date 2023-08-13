@@ -12,6 +12,7 @@ import Popup from '@ExpensesTracking/components/popup/popup';
 import moment from 'moment';
 import DatePickerView from '@ExpensesTracking/components/date-picker-view/date-picker-view';
 import {Keyboard} from 'react-native';
+import FormView from '@ExpensesTracking/components/form-view/form-view';
 
 const PopupCreateNewExpense = ({
   onClose,
@@ -44,49 +45,52 @@ const PopupCreateNewExpense = ({
         </Popup>
       )}
 
-      <TextFactory style={styles.titel}>{'Create Expense'}</TextFactory>
-      <Spacer size={26} />
-      <TextInput
-        placeholder="Title"
-        inputStyle={styles.textInput}
-        placeholderTextColor={styles.placeholder.color}
-        onChangeText={text => {
-          (newExpense as Expense).name = text;
-          setNewExpense({...(newExpense as Expense)});
-        }}
-      />
-      <Spacer size={27} />
-      <TextInput
-        placeholder="Amount"
-        inputStyle={styles.textInput}
-        placeholderTextColor={styles.placeholder.color}
-        onChangeText={text => {
-          (newExpense as Expense).amount = text;
-          setNewExpense({...(newExpense as Expense)});
-        }}
-      />
-      <Spacer size={27} />
-      <TextInput
-        value={
-          newExpense.date ? moment(newExpense.date).format('DD/MM/YYYY') : ''
-        }
-        placeholder="Date"
-        inputStyle={styles.textInput}
-        placeholderTextColor={styles.placeholder.color}
-        onChangeText={text => {}}
-        onPressIn={() => {
-          setOpenDatePicker(true);
-        }}
-      />
-      <Spacer size={235} />
-      <ButtonFactory
-        type="primary"
-        label="Create"
-        onPress={() => {
+      <FormView
+        title="Create Expense"
+        onClickConfirm={() => {
           createExpense();
           onClose();
         }}
+        properties={[
+          {
+            name: 'Title',
+            inputStyle: styles.textInput,
+            placeholderTextColor: styles.placeholder.color,
+            onChangeText: text => {
+              (newExpense as Expense).name = text;
+              setNewExpense({...(newExpense as Expense)});
+            },
+            value: (newExpense as Expense).name,
+            onPressIn: () => {},
+          },
+          {
+            name: 'Amount',
+            inputStyle: styles.textInput,
+            placeholderTextColor: styles.placeholder.color,
+            onChangeText: text => {
+              (newExpense as Expense).amount = text;
+              setNewExpense({...(newExpense as Expense)});
+            },
+            value: (newExpense as Expense).amount,
+            onPressIn: () => {},
+          },
+          {
+            name: 'Date',
+            inputStyle: styles.textInput,
+            placeholderTextColor: styles.placeholder.color,
+            onChangeText: text => {},
+            value: (newExpense as Expense).date
+              ? moment(newExpense.date).format('DD/MM/YYYY')
+              : '',
+            onPressIn: () => {
+              setOpenDatePicker(true);
+            },
+          },
+        ]}
+        children={<Spacer size={235} />}
+        spacerBetweenProperties={27}
       />
+
       <Spacer size={62} />
     </Box>
   );

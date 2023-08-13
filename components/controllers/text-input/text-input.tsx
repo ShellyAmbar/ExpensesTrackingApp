@@ -13,12 +13,15 @@ const TextInput = ({
   onChangeText,
   inputStyle,
   lableStyle,
+  value,
 
   ...props
 }: TextInputProps) => {
   return (
     <Box style={Styles.container}>
-      {label && <Text style={[Styles.title, {...lableStyle}]}>{label}</Text>}
+      {label && value?.length > 0 && (
+        <Text style={[Styles.title, {...lableStyle}]}>{label}</Text>
+      )}
       <Spacer size={8} />
       <RNTextInput
         {...props}

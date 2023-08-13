@@ -14,6 +14,7 @@ import DatePickerView from '@ExpensesTracking/components/date-picker-view/date-p
 import moment from 'moment';
 import usePopupFilter from './hooks/usePopupFilter';
 import {EnumFilters} from './hooks/interfaces';
+import FormView from '@ExpensesTracking/components/form-view/form-view';
 const PopupFilter = ({
   onSubmit,
   onClickClose,
@@ -68,54 +69,56 @@ const PopupFilter = ({
 
       <Spacer size={9} />
 
-      <Box style={styles.content}>
-        <TextInput
-          lableStyle={styles.lable}
-          inputStyle={styles.textInput}
-          label="Title"
-          defaultValue={selectedFilters.title ?? ''}
-          onChangeText={text => {
-            updateFilters(EnumFilters.Title, text);
-          }}
-        />
-        <Spacer size={41} />
-
-        <TextInput
-          lableStyle={styles.lable}
-          inputStyle={styles.textInput}
-          label="Amount"
-          defaultValue={selectedFilters.amount ?? ''}
-          onChangeText={text => {
-            updateFilters(EnumFilters.Amount, text);
-          }}
-        />
-        <Spacer size={41} />
-
-        <TextInput
-          lableStyle={styles.lable}
-          inputStyle={styles.textInput}
-          label="Date"
-          defaultValue={
-            selectedFilters.date
-              ? moment(selectedFilters.date).format('DD/MM/YYYY')
-              : ''
-          }
-          onChangeText={text => {}}
-          onPressIn={() => {
-            setOpenDatePicker(true);
-          }}
-        />
-        <Spacer size={55} />
-      </Box>
-
-      <ButtonFactory
-        type="primary"
-        label="Filter"
-        onPress={() => {
+      <FormView
+        onClickConfirm={() => {
           rootStore.user.filters = selectedFilters;
           onSubmit();
         }}
+        properties={[
+          {
+            labelStyle: styles.lable,
+            inputStyle: styles.textInput,
+            label: 'Title',
+            name: 'Title',
+            defaultValue: selectedFilters.title ?? '',
+            value: selectedFilters.title ?? '',
+            onChangeText: text => {
+              updateFilters(EnumFilters.Title, text);
+            },
+          },
+          {
+            labelStyle: styles.lable,
+            inputStyle: styles.textInput,
+            label: 'Amount',
+            name: 'Amount',
+            defaultValue: selectedFilters.amount ?? '',
+            value: selectedFilters.amount ?? '',
+            onChangeText: text => {
+              updateFilters(EnumFilters.Amount, text);
+            },
+          },
+          {
+            labelStyle: styles.lable,
+            inputStyle: styles.textInput,
+            label: 'Date',
+            name: 'Date',
+            defaultValue: selectedFilters.date
+              ? moment(selectedFilters.date).format('DD/MM/YYYY')
+              : '',
+            value: selectedFilters.date
+              ? moment(selectedFilters.date).format('DD/MM/YYYY')
+              : '',
+
+            onChangeText: text => {},
+            onPressIn: () => {
+              setOpenDatePicker(true);
+            },
+          },
+        ]}
+        children={<Spacer size={55} />}
+        spacerBetweenProperties={41}
       />
+
       <Spacer size={32} />
     </Box>
   );
