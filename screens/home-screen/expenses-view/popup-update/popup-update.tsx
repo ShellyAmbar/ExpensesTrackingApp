@@ -4,41 +4,22 @@ import styles from './popup-update.styles';
 import Spacer from '@ExpensesTracking/components/controllers/spacer/spacer';
 import PopupUpdateProps from './interfaces';
 import moment from 'moment';
-import Popup from '@ExpensesTracking/components/popup/popup';
 import usePopupUpdate from './hooks/usePopupUpdate';
-import DatePickerView from '@ExpensesTracking/components/date-picker-view/date-picker-view';
-import {Keyboard} from 'react-native';
 
 import FormViewFactory from '@ExpensesTracking/components/factories/form-view-factory/form-view-factory';
 const PopupUpdate = ({item, onSubmit, ...props}: PopupUpdateProps) => {
-  const {
-    openDatePicker,
-    setOpenDatePicker,
-    currentUpdatedExpense,
-    setcurrentUpdatedExpense,
-  } = usePopupUpdate({expense: item});
+  const {currentUpdatedExpense, setcurrentUpdatedExpense} = usePopupUpdate({
+    expense: item,
+  });
   return (
     <Box style={styles.container}>
-      {openDatePicker && (
-        <Popup
-          onClickClose={() => {
-            setOpenDatePicker(false);
-          }}
-          isVisible={openDatePicker}>
-          <DatePickerView
-            onConfirm={date => {
-              setcurrentUpdatedExpense({...currentUpdatedExpense, date});
-              setOpenDatePicker(false);
-              Keyboard.dismiss();
-            }}
-          />
-        </Popup>
-      )}
-
       <Spacer size={8} />
 
       <FormViewFactory
         type="expense"
+        onPickDate={date =>
+          setcurrentUpdatedExpense({...currentUpdatedExpense, date})
+        }
         title="Edit Expense"
         onClickConfirm={() => onSubmit(currentUpdatedExpense)}
         properties={[
@@ -70,9 +51,6 @@ const PopupUpdate = ({item, onSubmit, ...props}: PopupUpdateProps) => {
               : '',
 
             onChangeText: () => {},
-            onPressIn: () => {
-              setOpenDatePicker(true);
-            },
           },
         ]}
         children={<Spacer size={235} />}

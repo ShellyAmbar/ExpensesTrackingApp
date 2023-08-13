@@ -1,6 +1,5 @@
 import {FormViewProps} from '@ExpensesTracking/components/form-view/interfaces';
 
-export default interface FormViewFactoryProps extends FormViewProps {
-  type?: 'expense';
+export default interface FormViewExpenseProps extends FormViewProps {
   onPickDate?: (date: Date) => void;
 }

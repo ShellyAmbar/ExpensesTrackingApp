@@ -8,7 +8,6 @@ import {
 import {rootStore} from '@ExpensesTracking/store';
 
 const usePopupFilter = (props?: UsePopupFilterProps) => {
-  const [openDatePicker, setOpenDatePicker] = useState(false);
   const [selectedFilters, setSelectedFilters] = useState<Filters>({});
 
   useEffect(() => {
@@ -39,8 +38,6 @@ const usePopupFilter = (props?: UsePopupFilterProps) => {
 
   return {
     updateFilters,
-    setOpenDatePicker,
-    openDatePicker,
     selectedFilters,
     setSelectedFilters,
     cleanSelectedFilters,

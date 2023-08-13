@@ -7,7 +7,6 @@ const usePopupCreateExpense = () => {
   const [newExpense, setNewExpense] = useState<Expense>({
     date: new Date(),
   } as Expense);
-  const [openDatePicker, setOpenDatePicker] = useState(false);
 
   const root = useStore();
   const createExpense = () => {
@@ -48,8 +47,6 @@ const usePopupCreateExpense = () => {
     newExpense,
     setNewExpense,
     createExpense,
-    openDatePicker,
-    setOpenDatePicker,
   };
 };
 

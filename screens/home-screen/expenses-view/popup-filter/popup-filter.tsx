@@ -19,34 +19,13 @@ const PopupFilter = ({
   onClickClean,
   ...props
 }: PopupFilterProps) => {
-  const {
-    openDatePicker,
-    setOpenDatePicker,
-    selectedFilters,
-    updateFilters,
-    cleanSelectedFilters,
-  } = usePopupFilter();
+  const {selectedFilters, updateFilters, cleanSelectedFilters} =
+    usePopupFilter();
   return (
     <Box
       scroll
       contentContainerStyle={styles.container}
       style={{width: '100%'}}>
-      {openDatePicker && (
-        <Popup
-          onClickClose={() => {
-            setOpenDatePicker(false);
-          }}
-          isVisible={openDatePicker}>
-          <DatePickerView
-            onConfirm={date => {
-              updateFilters(EnumFilters.Date, date);
-              setOpenDatePicker(false);
-              Keyboard.dismiss();
-            }}
-          />
-        </Popup>
-      )}
-
       <Spacer size={16} />
       <Box style={styles.horizontalSpaces}>
         <Box
@@ -69,6 +48,7 @@ const PopupFilter = ({
 
       <FormViewFactory
         type="expense"
+        onPickDate={date => updateFilters(EnumFilters.Date, date)}
         onClickConfirm={() => {
           rootStore.user.filters = selectedFilters;
           onSubmit();
@@ -97,9 +77,6 @@ const PopupFilter = ({
               : '',
 
             onChangeText: text => {},
-            onPressIn: () => {
-              setOpenDatePicker(true);
-            },
           },
         ]}
         children={<Spacer size={55} />}
