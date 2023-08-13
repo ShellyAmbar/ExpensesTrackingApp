@@ -1,11 +1,7 @@
 import {useState} from 'react';
 
 const useFormView = () => {
-  const [openDatePicker, setOpenDatePicker] = useState(false);
-  return {
-    openDatePicker,
-    setOpenDatePicker,
-  };
+  return {};
 };
 
 export default useFormView;

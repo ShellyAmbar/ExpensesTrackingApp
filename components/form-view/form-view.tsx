@@ -13,12 +13,13 @@ const FormView = ({
   onClickConfirm,
   title,
   spacerBetweenProperties,
+  buttonName,
   ...props
 }: FormViewProps) => {
   return (
     <Box style={styles.container}>
       {title && <TextFactory style={styles.titel}>{title}</TextFactory>}
-      <Spacer size={26} />
+
       {properties?.map((propertie, index) => {
         return (
           <>
@@ -41,7 +42,13 @@ const FormView = ({
       })}
 
       {children}
-      <ButtonFactory type="primary" label="Create" onPress={onClickConfirm} />
+      {buttonName && (
+        <ButtonFactory
+          type="primary"
+          label={buttonName}
+          onPress={onClickConfirm}
+        />
+      )}
     </Box>
   );
 };

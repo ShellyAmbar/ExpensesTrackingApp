@@ -13,6 +13,7 @@ import moment from 'moment';
 import DatePickerView from '@ExpensesTracking/components/date-picker-view/date-picker-view';
 import {Keyboard} from 'react-native';
 import FormView from '@ExpensesTracking/components/form-view/form-view';
+import FormViewFactory from '@ExpensesTracking/components/factories/form-view-factory/form-view-factory';
 
 const PopupCreateNewExpense = ({
   onClose,
@@ -45,7 +46,8 @@ const PopupCreateNewExpense = ({
         </Popup>
       )}
 
-      <FormView
+      <FormViewFactory
+        type="expense"
         title="Create Expense"
         onClickConfirm={() => {
           createExpense();
@@ -53,9 +55,6 @@ const PopupCreateNewExpense = ({
         }}
         properties={[
           {
-            name: 'Title',
-            inputStyle: styles.textInput,
-            placeholderTextColor: styles.placeholder.color,
             onChangeText: text => {
               (newExpense as Expense).name = text;
               setNewExpense({...(newExpense as Expense)});
@@ -64,9 +63,6 @@ const PopupCreateNewExpense = ({
             onPressIn: () => {},
           },
           {
-            name: 'Amount',
-            inputStyle: styles.textInput,
-            placeholderTextColor: styles.placeholder.color,
             onChangeText: text => {
               (newExpense as Expense).amount = text;
               setNewExpense({...(newExpense as Expense)});
@@ -75,9 +71,9 @@ const PopupCreateNewExpense = ({
             onPressIn: () => {},
           },
           {
-            name: 'Date',
-            inputStyle: styles.textInput,
-            placeholderTextColor: styles.placeholder.color,
+            defaultValue: (newExpense as Expense).date
+              ? moment(newExpense.date).format('DD/MM/YYYY')
+              : '',
             onChangeText: text => {},
             value: (newExpense as Expense).date
               ? moment(newExpense.date).format('DD/MM/YYYY')
@@ -89,6 +85,7 @@ const PopupCreateNewExpense = ({
         ]}
         children={<Spacer size={235} />}
         spacerBetweenProperties={27}
+        buttonName="Create"
       />
 
       <Spacer size={62} />

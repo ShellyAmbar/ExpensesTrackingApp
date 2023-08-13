@@ -13,8 +13,9 @@ export type Propertie = {
 };
 export type FormViewProps = {
   onClickConfirm: () => void;
+  buttonName?: string;
   children?: any;
-  properties?: Propertie[];
+  properties: Propertie[];
   title?: string;
   spacerBetweenProperties: number;
 };

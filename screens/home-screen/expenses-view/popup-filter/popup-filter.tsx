@@ -2,19 +2,17 @@ import React from 'react';
 import {Box} from '@ExpensesTracking/components/controllers/box/box';
 import styles from './popup-filter.styles';
 import TextFactory from '@ExpensesTracking/components/factories/text-factory/text-factory';
-import TextInput from '@ExpensesTracking/components/controllers/text-input/text-input';
 import Spacer from '@ExpensesTracking/components/controllers/spacer/spacer';
-import ButtonFactory from '@ExpensesTracking/components/factories/button-factory/button-factory';
 import {PopupFilterProps} from './interfaces';
 import Close from '@ExpensesTracking/assets/images/close.svg';
-import {rootStore, useStore} from '@ExpensesTracking/store';
+import {rootStore} from '@ExpensesTracking/store';
 import {Keyboard} from 'react-native';
 import Popup from '@ExpensesTracking/components/popup/popup';
 import DatePickerView from '@ExpensesTracking/components/date-picker-view/date-picker-view';
 import moment from 'moment';
 import usePopupFilter from './hooks/usePopupFilter';
 import {EnumFilters} from './hooks/interfaces';
-import FormView from '@ExpensesTracking/components/form-view/form-view';
+import FormViewFactory from '@ExpensesTracking/components/factories/form-view-factory/form-view-factory';
 const PopupFilter = ({
   onSubmit,
   onClickClose,
@@ -69,17 +67,14 @@ const PopupFilter = ({
 
       <Spacer size={9} />
 
-      <FormView
+      <FormViewFactory
+        type="expense"
         onClickConfirm={() => {
           rootStore.user.filters = selectedFilters;
           onSubmit();
         }}
         properties={[
           {
-            labelStyle: styles.lable,
-            inputStyle: styles.textInput,
-            label: 'Title',
-            name: 'Title',
             defaultValue: selectedFilters.title ?? '',
             value: selectedFilters.title ?? '',
             onChangeText: text => {
@@ -87,10 +82,6 @@ const PopupFilter = ({
             },
           },
           {
-            labelStyle: styles.lable,
-            inputStyle: styles.textInput,
-            label: 'Amount',
-            name: 'Amount',
             defaultValue: selectedFilters.amount ?? '',
             value: selectedFilters.amount ?? '',
             onChangeText: text => {
@@ -98,10 +89,6 @@ const PopupFilter = ({
             },
           },
           {
-            labelStyle: styles.lable,
-            inputStyle: styles.textInput,
-            label: 'Date',
-            name: 'Date',
             defaultValue: selectedFilters.date
               ? moment(selectedFilters.date).format('DD/MM/YYYY')
               : '',
@@ -117,6 +104,7 @@ const PopupFilter = ({
         ]}
         children={<Spacer size={55} />}
         spacerBetweenProperties={41}
+        buttonName="Filter"
       />
 
       <Spacer size={32} />
