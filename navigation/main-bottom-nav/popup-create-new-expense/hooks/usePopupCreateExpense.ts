@@ -6,8 +6,11 @@ const usePopupCreateExpense = () => {
   const root = useStore();
   const createExpense = (newExpense: Expense) => {
     if (
+      newExpense.amount?.length &&
+      newExpense.date &&
+      newExpense.name &&
       newExpense.amount?.length > 0 &&
-      newExpense.date?.toString().length > 0 &&
+      newExpense.date?.toString()?.length > 0 &&
       newExpense.name?.length > 0
     ) {
       const isDateIncludedInList =
@@ -20,7 +23,7 @@ const usePopupCreateExpense = () => {
         newExpense.id = 0;
         const expenseItem: ExpenseItem = {
           id: root.user.expenses?.length,
-          date: newExpense.date,
+          date: newExpense.date!!,
           expenses: [newExpense as Expense],
         };
         root.user.expenses.push(expenseItem);
