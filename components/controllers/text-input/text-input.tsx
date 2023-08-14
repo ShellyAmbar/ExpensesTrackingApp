@@ -19,7 +19,7 @@ const TextInput = ({
 }: TextInputProps) => {
   return (
     <Box style={Styles.container}>
-      {label && value?.length > 0 && (
+      {label && value && value?.length > 0 && (
         <Text style={[Styles.title, {...lableStyle}]}>{label}</Text>
       )}
       <Spacer size={8} />

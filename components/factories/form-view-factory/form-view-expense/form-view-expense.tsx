@@ -67,12 +67,10 @@ const FormViewExpense = ({
             inputStyle: styles.textInput,
             placeholderTextColor: styles.placeholder.color,
             onChangeText: text => {
-              if (text?.length > 0) {
-                setcurrentUpdatedExpense({
-                  ...currentUpdatedExpense!!,
-                  amount: text,
-                });
-              }
+              setcurrentUpdatedExpense({
+                ...currentUpdatedExpense!!,
+                amount: text,
+              });
             },
             value: currentUpdatedExpense?.amount ?? '',
             defaultValue: currentUpdatedExpense?.amount ?? '',
