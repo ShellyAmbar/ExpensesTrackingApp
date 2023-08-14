@@ -24,6 +24,7 @@ const FormView = ({
         return (
           <>
             <TextInput
+              key={index}
               label={propertie.label ?? ''}
               lableStyle={propertie.labelStyle ?? {}}
               placeholder={propertie.name}
