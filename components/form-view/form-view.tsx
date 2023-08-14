@@ -46,7 +46,7 @@ const FormView = ({
         <ButtonFactory
           type="primary"
           label={buttonName}
-          onPress={onClickConfirm}
+          onPress={() => onClickConfirm && onClickConfirm()}
         />
       )}
     </Box>

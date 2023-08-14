@@ -3,11 +3,11 @@ export enum Currency {
   Shekel = '₪',
 }
 export type Expense = {
-  id: number;
-  name: string;
-  amount: string;
-  currency: Currency;
-  date: Date;
+  id?: number;
+  name?: string;
+  amount?: string;
+  currency?: Currency;
+  date?: Date;
 };
 export type ExpenseItem = {
   id: number;

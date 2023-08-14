@@ -3,11 +3,11 @@ enum Currency {
   Shekel = '₪',
 }
 type Expense = {
-  id: number;
-  name: string;
-  amount: string;
-  currency: Currency;
-  date: Date;
+  id?: number;
+  name?: string;
+  amount?: string;
+  currency?: Currency;
+  date?: Date;
 };
 type ExpenseItem = {
   id: number;

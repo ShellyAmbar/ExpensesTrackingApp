@@ -1,15 +1,10 @@
 import {useStore} from '@ExpensesTracking/store';
 import {Expense, ExpenseItem} from '@ExpensesTracking/store/data/expanses';
 import moment from 'moment';
-import {useState} from 'react';
 
 const usePopupCreateExpense = () => {
-  const [newExpense, setNewExpense] = useState<Expense>({
-    date: new Date(),
-  } as Expense);
-
   const root = useStore();
-  const createExpense = () => {
+  const createExpense = (newExpense: Expense) => {
     if (
       newExpense.amount?.length > 0 &&
       newExpense.date?.toString().length > 0 &&
@@ -44,8 +39,6 @@ const usePopupCreateExpense = () => {
     }
   };
   return {
-    newExpense,
-    setNewExpense,
     createExpense,
   };
 };

@@ -1,6 +1,3 @@
-import {GlobalColors} from '@ExpensesTracking/constants/colors';
-import Styles, {width} from '@ExpensesTracking/constants/styles';
-
 import {StyleSheet} from 'react-native';
 
 export default StyleSheet.create({

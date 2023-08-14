@@ -6,12 +6,9 @@ import Spacer from '@ExpensesTracking/components/controllers/spacer/spacer';
 import {PopupFilterProps} from './interfaces';
 import Close from '@ExpensesTracking/assets/images/close.svg';
 import {rootStore} from '@ExpensesTracking/store';
-import {Keyboard} from 'react-native';
-import Popup from '@ExpensesTracking/components/popup/popup';
-import DatePickerView from '@ExpensesTracking/components/date-picker-view/date-picker-view';
-import moment from 'moment';
+
 import usePopupFilter from './hooks/usePopupFilter';
-import {EnumFilters} from './hooks/interfaces';
+
 import FormViewFactory from '@ExpensesTracking/components/factories/form-view-factory/form-view-factory';
 const PopupFilter = ({
   onSubmit,
@@ -19,8 +16,7 @@ const PopupFilter = ({
   onClickClean,
   ...props
 }: PopupFilterProps) => {
-  const {selectedFilters, updateFilters, cleanSelectedFilters} =
-    usePopupFilter();
+  const {cleanSelectedFilters} = usePopupFilter();
   return (
     <Box
       scroll
@@ -48,37 +44,11 @@ const PopupFilter = ({
 
       <FormViewFactory
         type="expense"
-        onPickDate={date => updateFilters(EnumFilters.Date, date)}
-        onClickConfirm={() => {
-          rootStore.user.filters = selectedFilters;
+        expense={{...rootStore.user.filters}}
+        onConfirmFormExpense={expense => {
+          rootStore.user.filters = expense;
           onSubmit();
         }}
-        properties={[
-          {
-            defaultValue: selectedFilters.title ?? '',
-            value: selectedFilters.title ?? '',
-            onChangeText: text => {
-              updateFilters(EnumFilters.Title, text);
-            },
-          },
-          {
-            defaultValue: selectedFilters.amount ?? '',
-            value: selectedFilters.amount ?? '',
-            onChangeText: text => {
-              updateFilters(EnumFilters.Amount, text);
-            },
-          },
-          {
-            defaultValue: selectedFilters.date
-              ? moment(selectedFilters.date).format('DD/MM/YYYY')
-              : '',
-            value: selectedFilters.date
-              ? moment(selectedFilters.date).format('DD/MM/YYYY')
-              : '',
-
-            onChangeText: text => {},
-          },
-        ]}
         children={<Spacer size={55} />}
         spacerBetweenProperties={41}
         buttonName="Filter"

@@ -12,10 +12,10 @@ export type Propertie = {
   placeholderTextColor?: string;
 };
 export type FormViewProps = {
-  onClickConfirm: () => void;
+  onClickConfirm?: () => void;
   buttonName?: string;
   children?: any;
-  properties: Propertie[];
+  properties?: Propertie[];
   title?: string;
   spacerBetweenProperties: number;
 };
