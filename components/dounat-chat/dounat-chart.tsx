@@ -101,10 +101,10 @@ export default function DonutChart({
   }, []);
 
   return (
-    <View style={{width: radius * 2}}>
+    <View style={{width: '100%'}}>
       <Svg
         height={isCemiCircle ? radius : radius * 2}
-        width={radius * 2}
+        width={'100%'}
         style={{
           justifyContent: 'center',
           alignItems: 'center',
@@ -161,9 +161,9 @@ export default function DonutChart({
         />
       )}
       {isShowDescription && (
-        <View>
+        <View style={{width: '100%'}}>
           {precentegs.map((precentage, index) => (
-            <View style={{flexDirection: 'row'}}>
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
               <View
                 style={{
                   width: 5,
