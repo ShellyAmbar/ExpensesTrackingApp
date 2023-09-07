@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, {useRef, useEffect} from 'react';
 import {Easing, TextInput, Animated, View, Text} from 'react-native';
 
 import Svg, {G, Circle} from 'react-native-svg';
@@ -23,12 +23,12 @@ export default function DonutChart({
   textDescriptionStyle,
   valueDescriptionStyle,
 }: DonutChartProps) {
-  const animated = React.useRef(new Animated.Value(0)).current;
+  const animated = useRef(new Animated.Value(0)).current;
 
-  const refs = React.useRef([]);
+  const refs = useRef([]);
   refs.current = [];
 
-  const inputRef = React.useRef();
+  const inputRef = useRef();
   const circumference = 2 * Math.PI * radius;
   const halfCircle = radius + strokeWidth;
   const max = precentegs.reduce((v1, v2) => v1 + v2.value, 0);
@@ -55,7 +55,7 @@ export default function DonutChart({
     });
   };
   var i = 0;
-  var ref = React.useRef();
+  var ref = useRef();
 
   const setRef = (strokeDashoffset, value) => {
     if (ref) {
@@ -76,7 +76,7 @@ export default function DonutChart({
     }
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     ref = refs.current[0];
     animation(0, precentegs.length, animated);
 
