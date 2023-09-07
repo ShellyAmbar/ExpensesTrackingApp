@@ -22,6 +22,7 @@ export default function DonutChart({
   totalValueStyle = {},
   textDescriptionStyle,
   valueDescriptionStyle,
+  dotDescriptionStyle,
 }: DonutChartProps) {
   const animated = useRef(new Animated.Value(0)).current;
 
@@ -161,19 +162,17 @@ export default function DonutChart({
         />
       )}
       {isShowDescription && (
-        <View style={{width: '100%'}}>
+        <View>
           {precentegs.map((precentage, index) => (
             <View
               key={precentage.id}
               style={{flexDirection: 'row', alignItems: 'center'}}>
               <View
-                style={{
-                  width: 5,
-                  height: 5,
-                  backgroundColor: precentage.color,
-                  borderRadius: 100,
-                  marginEnd: 10,
-                }}
+                style={[
+                  {backgroundColor: precentage.color},
+                  Styles.circle,
+                  {...dotDescriptionStyle},
+                ]}
               />
               <Text
                 style={[

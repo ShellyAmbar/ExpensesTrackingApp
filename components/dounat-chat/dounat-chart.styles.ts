@@ -17,4 +17,10 @@ export default StyleSheet.create({
     fontSize: 16,
     fontWeight: '400',
   },
+  circle: {
+    width: 8,
+    height: 8,
+    borderRadius: 100,
+    marginEnd: 10,
+  },
 });
