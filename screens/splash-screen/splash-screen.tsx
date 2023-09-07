@@ -10,11 +10,12 @@ const SplashScreen = (props?: any) => {
   const rootStore = useStore();
   useEffect(() => {
     const timeout = setTimeout(() => {
-      if (rootStore.user.isLoggedIn) {
-        props?.navigation.navigate('Main');
-      } else {
-        props?.navigation.navigate('Auth');
-      }
+      // if (rootStore.user.isLoggedIn) {
+      //   props?.navigation.navigate('Main');
+      // } else {
+      //   props?.navigation.navigate('Auth');
+      // }
+      props?.navigation.navigate('Main');
     }, 1500);
     return () => clearTimeout(timeout);
   }, []);

@@ -7,7 +7,7 @@ const useHomeScreen = ({navigation}) => {
   useLayoutEffect(() => {
     navigation.setOptions({
       headerShown: true,
-      title: rootStore.user.fullName,
+      title: rootStore.user.fullName ? rootStore.user.fullName : '',
       headerTitleStyle: styles.headerTitle,
       headerTitleAlign: 'center',
     });
