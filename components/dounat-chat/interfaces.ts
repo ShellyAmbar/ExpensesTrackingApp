@@ -23,6 +23,7 @@ type DonutChartProps = {
   textDescriptionStyle?: TextStyle;
   valueDescriptionStyle?: TextStyle;
   dotDescriptionStyle?: TextStyle;
+  easing: any;
 };
 
 export {Precentage, DonutChartProps};

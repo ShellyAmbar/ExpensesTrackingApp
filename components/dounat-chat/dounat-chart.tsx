@@ -1,6 +1,5 @@
 import React, {useRef, useEffect} from 'react';
 import {Easing, TextInput, Animated, View, Text} from 'react-native';
-
 import Svg, {G, Circle} from 'react-native-svg';
 import {DonutChartProps} from './interfaces';
 import Styles from './dounat-chart.styles';
@@ -11,7 +10,7 @@ export default function DonutChart({
   precentegs = [],
   radius = 200,
   strokeWidth = 150,
-  duration = 100,
+  duration = 500,
   backColor = 'tomato',
   textColor = 'black',
   strokeLinecap = 'none',
@@ -23,6 +22,7 @@ export default function DonutChart({
   textDescriptionStyle,
   valueDescriptionStyle,
   dotDescriptionStyle,
+  easing = Easing.out(Easing.ease),
 }: DonutChartProps) {
   const animated = useRef(new Animated.Value(0)).current;
 
@@ -48,7 +48,7 @@ export default function DonutChart({
         .reduce((v1, v2) => v1 + v2.value, 0),
       duration,
       useNativeDriver: true,
-      easing: Easing.out(Easing.linear),
+      easing,
     }).start(() => {
       if (index < maxIndex - 1) {
         animation(++index, precentegs.length, animated);
@@ -141,7 +141,9 @@ export default function DonutChart({
             strokeWidth={strokeWidth}
             strokeLinejoin="round"
             strokeOpacity=".1"
-            strokeDasharray={2 * Math.PI * (radius * 0.5)}
+            strokeDasharray={
+              2 * Math.PI * (isCemiCircle ? radius * 0.5 : radius)
+            }
           />
         </G>
       </Svg>
