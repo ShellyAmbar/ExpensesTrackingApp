@@ -7,7 +7,7 @@ const ExpensesGraph = () => {
   return (
     <View style={{width: '100%', paddingHorizontal: 16}}>
       <DonutChart
-        isCemiCircle={true}
+        isCemiCircle={false}
         isShowDescription={true}
         precentegs={[
           {id: 5, value: 10, color: 'purple', name: 'home'},

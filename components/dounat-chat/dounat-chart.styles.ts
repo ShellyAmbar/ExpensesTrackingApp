@@ -6,7 +6,7 @@ export default StyleSheet.create({
     textAlign: 'center',
 
     alignSelf: 'center',
-    marginTop: -50,
+    marginTop: -80,
   },
   velue: {
     marginEnd: 10,

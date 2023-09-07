@@ -109,7 +109,7 @@ export default function DonutChart({
           justifyContent: 'center',
           alignItems: 'center',
         }}
-        viewBox={`${0} ${isCemiCircle ? halfCircle / 2 : halfCircle / 3} ${
+        viewBox={`${0} ${isCemiCircle ? halfCircle / 2 : halfCircle / 4} ${
           halfCircle * 2
         } ${halfCircle}`}>
         <G rotation={rotation} origin={`${halfCircle}, ${halfCircle}`}>
@@ -163,7 +163,9 @@ export default function DonutChart({
       {isShowDescription && (
         <View style={{width: '100%'}}>
           {precentegs.map((precentage, index) => (
-            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <View
+              key={precentage.id}
+              style={{flexDirection: 'row', alignItems: 'center'}}>
               <View
                 style={{
                   width: 5,
